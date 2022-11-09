@@ -11,7 +11,9 @@ public class PlayerCubeMovement : MonoBehaviour
     private Camera camera = null;
 
     private bool _isPlayingGame;
+    private bool isClick = false;
 
+    Coroutine clickCheckCoroutine;
 
     private void Start()
     {
@@ -20,10 +22,9 @@ public class PlayerCubeMovement : MonoBehaviour
         StartCoroutine(Click());
     }
 
-    bool isClick = false;
-
     private IEnumerator CheckClick()
     {
+        // 0.3f 안에 어떤 동작을 하지 않으면 클릭으로 체크
         yield return new WaitForSeconds(0.3f);
         if (isClick == true)
             isClick = false;
@@ -36,10 +37,10 @@ public class PlayerCubeMovement : MonoBehaviour
             yield return new WaitUntil(() => Input.GetMouseButton(0));
             _startTouchPos = GetScreenPosition();
             isClick = true;
-
-            StartCoroutine(CheckClick());
+            clickCheckCoroutine = StartCoroutine(CheckClick());
 
             yield return new WaitUntil(() => Input.GetMouseButtonUp(0) || isClick == false);
+            if(clickCheckCoroutine != null) StopCoroutine(clickCheckCoroutine);
             _endTouchPos = GetScreenPosition();
 
             if (isClick)
@@ -48,17 +49,17 @@ public class PlayerCubeMovement : MonoBehaviour
                 // 오른쪽
                 if (100 <= _valuePos.x)
                 {
-
+                    Debug.Log("오른쪽");
                 }
                 // 왼쪽
                 else if (_valuePos.x <= -100)
                 {
-
+                    Debug.Log("왼쪽");
                 }
                 // 클릭
                 else
                 {
-
+                    Debug.Log("클릭");
                 }
 
                 isClick = false;
