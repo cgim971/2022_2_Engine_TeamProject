@@ -12,8 +12,7 @@ public class JumpRing : MonoBehaviour
         {
             useFlag = true;
             //other.GetComponent<>();
-            //점프가능 트리거 초기화 함수 호출 or 트리거 변경
-
+            //TODO : 점프가능 트리거 초기화 함수 호출 or 트리거 변경
         }
     }
 }
