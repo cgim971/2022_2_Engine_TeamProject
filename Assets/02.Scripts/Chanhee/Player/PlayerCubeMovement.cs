@@ -6,16 +6,24 @@ using DG.Tweening;
 public class PlayerCubeMovement : MonoBehaviour, PlayerMovement
 {
     private Vector3 _nextPos = Vector3.zero;
+    private Vector3 _nextDis = Vector3.zero;
+    private Vector3 _nextRot = Vector3.zero;
+
+
     private Vector3 _startTouchPos = Vector3.zero;
     private Vector3 _endTouchPos = Vector3.zero;
     private Vector3 _valuePos = Vector3.zero;
 
+
     private Camera camera = null;
+
 
     private bool _isPlayingGame;
     private bool isClick = false;
 
+
     Coroutine clickCheckCoroutine;
+
 
     [SerializeField] private LayerMask _groundLayer;
 
@@ -24,9 +32,13 @@ public class PlayerCubeMovement : MonoBehaviour, PlayerMovement
         camera = Camera.main;
         _isPlayingGame = true;
         _groundLayer = LayerMask.GetMask("Ground");
+
+        _nextDis.z = 1;
+
         StartCoroutine(Move());
         StartCoroutine(MoveState());
     }
+
 
     Vector3 GetScreenPosition()
     {
@@ -38,10 +50,9 @@ public class PlayerCubeMovement : MonoBehaviour, PlayerMovement
     {
         while (true)
         {
-            _nextPos.x = 0;
-            _nextPos.z = transform.position.z + 1;
             transform.DOMove(_nextPos, 0.8f);
-
+            _nextPos.x = transform.position.x + _nextDis.x;
+            _nextPos.z = transform.position.z + _nextDis.z;
             yield return null;
         }
     }
@@ -53,6 +64,41 @@ public class PlayerCubeMovement : MonoBehaviour, PlayerMovement
         {
             DOTween.To(() => _nextPos.y, y => _nextPos.y = y, 4, 0.4f).SetEase(Ease.OutQuad).SetLoops(2, LoopType.Yoyo);
         }
+    }
+
+    public void Rotation(bool isLeft = false)
+    {
+        if (isLeft)
+        {
+            _nextRot.y -= 90;
+
+            if (_nextDis.z == 0)
+            {
+                _nextDis.z = _nextDis.x == 1 ? 1 : -1;
+                _nextDis.x = 0;
+            }
+            else
+            {
+                _nextDis.x = _nextDis.z == 1 ? -1 : 1;
+                _nextDis.z = 0;
+            }
+        }
+        else
+        {
+            _nextRot.y += 90;
+
+            if (_nextDis.z == 0)
+            {
+                _nextDis.z = _nextDis.x == 1 ? -1 : 1;
+                _nextDis.x = 0;
+            }
+            else
+            {
+                _nextDis.x = _nextDis.z == 1 ? 1 : -1;
+                _nextDis.z = 0;
+            }
+        }
+        transform.DORotate(_nextRot, 0.5f).SetEase(Ease.Linear);
     }
 
     public IEnumerator CheckClick()
@@ -81,18 +127,17 @@ public class PlayerCubeMovement : MonoBehaviour, PlayerMovement
                 // 오른쪽
                 if (100 <= _valuePos.x)
                 {
-                    Debug.Log("오른쪽");
+                    Rotation(false);
                 }
                 // 왼쪽
                 else if (_valuePos.x <= -100)
                 {
-                    Debug.Log("왼쪽");
+                    Rotation(true);
                 }
                 // 클릭
                 else
                 {
                     Jump();
-                    Debug.Log("클릭");
                 }
 
                 isClick = false;
@@ -100,7 +145,6 @@ public class PlayerCubeMovement : MonoBehaviour, PlayerMovement
             else
             {
                 Jump();
-                Debug.Log("클릭");
             }
         }
     }
