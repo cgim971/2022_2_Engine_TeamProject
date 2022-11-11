@@ -8,8 +8,7 @@ public class GravityReverse : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            GetComponent<CustomGravity>().gravityScale *= -1f;
-            
+            GetComponent<CustomGravity>().SetGravity();
         }
     }
 }

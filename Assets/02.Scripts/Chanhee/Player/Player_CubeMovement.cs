@@ -5,7 +5,6 @@ using DG.Tweening;
 
 public class Player_CubeMovement : Player_BaseMovement
 {
-
     Coroutine clickCheckCoroutine;
 
     public void Start()
@@ -17,6 +16,7 @@ public class Player_CubeMovement : Player_BaseMovement
     private void FixedUpdate()
     {
         Move();
+        camera.transform.position = new Vector3(0, 3, transform.position.z - 10);
     }
 
     protected override IEnumerator PlayerMoveState()
@@ -68,12 +68,18 @@ public class Player_CubeMovement : Player_BaseMovement
     {
         if (CheckGround())
         {
-            Vector3 jumpPower = Vector3.up * jumpHeight;
+            Vector3 jumpPower = gravity.GRAVITY * -1 * jumpHeight;
             rb.AddForce(jumpPower, ForceMode.VelocityChange);
         }
     }
-    public void Rotation(bool isLeft = false)
+    public override void Rotation(bool isLeft = false, bool isGravity = false)
     {
+        if (isGravity)
+        {
+            rot.z += 180;
+            transform.DORotate(rot, 1f).SetEase(Ease.Linear);
+            return;
+        }
         if (isLeft)
         {
             rot.y -= 90;

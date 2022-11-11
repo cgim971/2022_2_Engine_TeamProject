@@ -1,11 +1,15 @@
 using UnityEngine;
+using DG.Tweening;
 
 [RequireComponent(typeof(Rigidbody))]
 public class CustomGravity : MonoBehaviour
 {
-    public float gravityScale = 1.0f;
+    [SerializeField] private float gravityScale = 1.0f;
+    private static float globalGravity = -9.81f;
 
-    public static float globalGravity = -9.81f;
+
+    private Vector3 gravity = Vector3.down;
+    public Vector3 GRAVITY => gravity;
 
     Rigidbody m_rb;
 
@@ -21,14 +25,21 @@ public class CustomGravity : MonoBehaviour
         m_rb.AddForce(gravity, ForceMode.Acceleration);
     }
 
+    public void SetGravity()
+    {
+        gravity *= -1;
+
+        GetComponent<Player_BaseMovement>().Rotation(false, true);
+
+        gravityScale *= -1f;
+        //GetComponent<ParticleSystem>().Play();
+    }
+
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            gravityScale *= -1f;
-            GetComponent<ParticleSystem>().Play();
-            
-            
+            SetGravity();
         }
     }
 }
