@@ -16,7 +16,12 @@ public class Player_CubeMovement : Player_BaseMovement
     private void FixedUpdate()
     {
         Move();
-        camera.transform.position = new Vector3(0, 3, transform.position.z - 10);
+        //camera.transform.position = Vector3.Lerp(camera.transform.position, new Vector3(transform.position.x - dir.x * 10, 3, transform.position.z - dir.z * 10), 1f);
+        //camera.transform.LookAt(transform.position);
+        // 카메라가 부드럽게 회전하기
+
+        camera.transform.position = transform.position + new Vector3(transform.position.x - dir.x * 10, 3, transform.position.z - dir.z * 10);
+        //camera.transform.LookAt(transform.position);
     }
 
     protected override IEnumerator PlayerMoveState()
