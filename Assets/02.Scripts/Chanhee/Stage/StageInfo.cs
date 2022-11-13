@@ -8,8 +8,6 @@ public class StageInfo : MonoBehaviour, IPoolable
 {
     Button selectBtn;
     TextMeshProUGUI stageTitleTxt;
-    TextMeshProUGUI stageInfoTxt;
-    Image stageSprite;
 
     public StageSO stageSO;
 
@@ -19,7 +17,7 @@ public class StageInfo : MonoBehaviour, IPoolable
         set
         {
             stageSO = value;
-            //SetStageInfo();
+            SetStageInfo();
         }
     }
 
@@ -34,15 +32,11 @@ public class StageInfo : MonoBehaviour, IPoolable
             Debug.Log("stage select");
         });
         stageTitleTxt = selectBtn.transform.Find("StageTitleTxt").GetComponent<TextMeshProUGUI>();
-        stageInfoTxt = selectBtn.transform.Find("StageInfoTxt").GetComponent<TextMeshProUGUI>();
-        stageSprite = selectBtn.transform.Find("StageSprite").GetComponent<Image>();
     }
 
     public void SetStageInfo()
     {
         stageTitleTxt.text = $"{stageSO.stageTitle}";
-        stageInfoTxt.text = $"{stageSO.stageInfo}";
-        stageSprite.sprite = stageSO.stageSprite;
     }
 
     public void OnPool()

@@ -7,6 +7,4 @@ public class StageSO : ScriptableObject
 {
     public string stageTitle;
     public int stageIndex;
-    public string stageInfo;
-    public Sprite stageSprite;
 }
