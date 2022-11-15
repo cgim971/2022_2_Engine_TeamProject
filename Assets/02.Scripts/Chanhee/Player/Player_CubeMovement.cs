@@ -20,7 +20,7 @@ public class Player_CubeMovement : Player_BaseMovement
         //camera.transform.LookAt(transform.position);
         // 카메라가 부드럽게 회전하기
 
-        camera.transform.position = transform.position + new Vector3(transform.position.x - dir.x * 10, 3, transform.position.z - dir.z * 10);
+        //camera.transform.position = transform.position + new Vector3(transform.position.x - dir.x * 10, 3, transform.position.z - dir.z * 10);
         //camera.transform.LookAt(transform.position);
     }
 
@@ -42,11 +42,11 @@ public class Player_CubeMovement : Player_BaseMovement
 
             if (isClick)
             {
-                if (100 <= valuePos.x)
-                    Rotation(false);
-                else if (valuePos.x <= -100)
-                    Rotation(true);
-                else
+                //if (100 <= valuePos.x)
+                //    Rotation(false);
+                //else if (valuePos.x <= -100)
+                //    Rotation(true);
+                //else
                     Jump();
 
                 isClick = false;
@@ -77,15 +77,15 @@ public class Player_CubeMovement : Player_BaseMovement
             rb.AddForce(jumpPower, ForceMode.VelocityChange);
         }
     }
-    public override void Rotation(bool isLeft = false, bool isGravity = false)
+    public override void Rotation(bool isleft = false, bool isgravity = false)
     {
-        if (isGravity)
+        if (isgravity)
         {
             rot.z += 180;
             transform.DORotate(rot, 1f).SetEase(Ease.Linear);
             return;
         }
-        if (isLeft)
+        if (isleft)
         {
             rot.y -= 90;
 
