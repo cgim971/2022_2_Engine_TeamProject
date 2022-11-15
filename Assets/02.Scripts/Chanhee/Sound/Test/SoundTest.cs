@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class SoundTest : MonoBehaviour
 {
-    // Start is called before the first frame update
     void Start()
     {
-        SoundManager.CreateAudio("sample", this.transform);
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+        }
+    }
+
 }

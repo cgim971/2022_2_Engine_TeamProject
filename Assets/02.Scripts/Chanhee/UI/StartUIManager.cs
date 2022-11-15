@@ -26,8 +26,11 @@ public class StartUIManager : MonoBehaviour
         settingBtn.onClick.AddListener(() => OnClickSettingBtn());
 
         startBtnText = startBtn.transform.Find("StartBtnText").GetComponent<TextMeshProUGUI>();
-        startBtnText = inventoryBtn.transform.Find("InventoryBtnText").GetComponent<TextMeshProUGUI>();
-        startBtnText = settingBtn.transform.Find("SettingBtnText").GetComponent<TextMeshProUGUI>();
+        startBtnText.text = "Start";
+        inventoryBtnText = inventoryBtn.transform.Find("InventoryBtnText").GetComponent<TextMeshProUGUI>();
+        inventoryBtnText.text = "Inventory";
+        settingBtnText = settingBtn.transform.Find("SettingBtnText").GetComponent<TextMeshProUGUI>();
+        settingBtnText.text = "Setting";
     }
 
     public void OnClickStartBtn()

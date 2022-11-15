@@ -4,57 +4,26 @@ using UnityEngine;
 
 public class SoundManager
 {
-    public enum SoundType
+    public static Dictionary<string, AudioClip> soundClipDictionary = new Dictionary<string, AudioClip>();
+    public static Dictionary<string, GameObject> soundObjectDictionary = new Dictionary<string, GameObject>();
+
+    public static void CreateSoundObject()
     {
-        NONE,
-        SOUNDOBJECT,
+        
     }
 
-    public static Dictionary<string, AudioClip> audioDictionary = new Dictionary<string, AudioClip>();
-    public static Dictionary<string, GameObject> audioObjectDictionary = new Dictionary<string, GameObject>();
-
-    private static string SOUNDOBJECT = "SoundObject";
-
-    public static void CreateAudio(string name, Transform parent = null, SoundType type = SoundType.NONE)
+    public static void CreateSoundClip()
     {
-        if (!PoolingManager.PooledCheck(SOUNDOBJECT)) PoolingManager.CreatePool(SOUNDOBJECT, parent);
 
-        AudioClip audioClip = null;
-        if (!audioDictionary.ContainsKey(name))
-        {
-            audioClip = Resources.Load<AudioClip>($"Sounds/{name}");
-            audioDictionary.Add(name, audioClip);
-        }
-        else
-        {
-            audioClip = audioDictionary[name];
-        }
-
-        GameObject newSoundObj = PoolingManager.PopObject(SOUNDOBJECT);
-        switch (type)
-        {
-            case SoundType.SOUNDOBJECT:
-                newSoundObj.AddComponent<SoundObject>();
-                break;
-        }
-
-        newSoundObj.GetComponent<SoundObject_Base>().AUDIOSOURCE.clip = audioClip;
-
-        audioObjectDictionary.Add(name, newSoundObj);
     }
 
-    public static void PlayAudio(string name)
+    public static void PlaySound()
     {
-        if (!audioObjectDictionary.ContainsKey(name)) CreateAudio(name);
 
-        audioObjectDictionary[name].GetComponent<ISound>().PlaySound();
     }
 
-    public static void StopAudio(string name)
+    public static void StopSound()
     {
-        if (!audioObjectDictionary.ContainsKey(name)) CreateAudio(name);
 
-        audioObjectDictionary[name].GetComponent<ISound>().StopSound();
     }
-
 }
