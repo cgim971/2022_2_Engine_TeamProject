@@ -28,9 +28,7 @@ public class CustomGravity : MonoBehaviour
     public void SetGravity()
     {
         gravity *= -1;
-
         GetComponent<Player_BaseMovement>().Rotation(false, true);
-
         gravityScale *= -1f;
         //GetComponent<ParticleSystem>().Play();
     }
