@@ -16,6 +16,10 @@ public class GameManager : MonoSingleton<GameManager>
         {
             PlayerPrefs.DeleteAll();
         }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            SoundManager.SoundStop( SoundManager.SoundType.BGM);
+        }
     }
 
 }
