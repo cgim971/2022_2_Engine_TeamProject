@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 _dir = Vector3.forward;
     [SerializeField] private float _speed = 5f;
-    [SerializeField] private float _jumpPower = 5f;
+    [SerializeField] private float _jumpPower = 18f;
 
 
     private int _jumpExtraCount = 0;
@@ -23,8 +23,6 @@ public class PlayerMovement : MonoBehaviour
         get => _jumpExtraCount;
         set => _jumpExtraCount = value;
     }
-
-
 
     private void Awake()
     {
@@ -35,16 +33,16 @@ public class PlayerMovement : MonoBehaviour
         _groundLayer = LayerMask.GetMask("Ground");
     }
 
+    private void Start()
+    {
+        
+    }
 
     private void Update()
     {
         if (Input.GetButtonDown("Jump"))
         {
             Jump();
-        }
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            JUMPEXTRACOUNT += 1;
         }
     }
 
@@ -55,7 +53,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void LateUpdate()
     {
-        _camera.transform.position = transform.position + new Vector3(15, 5, 0);
+        // 카메라 수정 필요
+        CameraMove();
+    }
+
+    public void CameraMove()
+    {
+        Vector3 cameraPos = transform.position + new Vector3(15, _customGravity.ISGRAVITY ? -1 : 1 * 5, 0);
+        _camera.transform.position = cameraPos;
     }
 
     public void Move()

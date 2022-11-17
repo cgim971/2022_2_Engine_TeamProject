@@ -6,15 +6,18 @@ public class CustomGravity : MonoBehaviour
 {
     private Rigidbody _rigidbody = null;
 
-    [SerializeField] private float _gravityScale = 1.0f;
+    [SerializeField] private float _gravityScale = 4.0f;
     private static float _globalGravity = -9.81f;
 
+    private bool _isGravity = false;
+    public bool ISGRAVITY
+    {
+        get => _isGravity;
+        set => _isGravity = value;
+    }
 
     private Vector3 _gravity = Vector3.down;
     public Vector3 GRAVITY => _gravity;
-
-
-
 
     void OnEnable()
     {
@@ -30,8 +33,8 @@ public class CustomGravity : MonoBehaviour
 
     public void SetGravity()
     {
+        _isGravity = !_isGravity;
         _gravity *= -1;
-        //GetComponent<Player_BaseMovement>().Rotation(false, true);
         _gravityScale *= -1f;
         //GetComponent<ParticleSystem>().Play();
     }
