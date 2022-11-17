@@ -5,9 +5,8 @@ using UnityEngine;
 
 public class PoolingManager
 {
-    public static Dictionary<string, Queue<GameObject>> poolDictionary = new Dictionary<string, Queue<GameObject>>();
-
     public static Dictionary<string, GameObject> poolObjectDictionary = new Dictionary<string, GameObject>();
+    public static Dictionary<string, Queue<GameObject>> poolDictionary = new Dictionary<string, Queue<GameObject>>();
 
     public static void CreatePool(string name, Transform parent = null, int count = 5)
     {
@@ -64,7 +63,7 @@ public class PoolingManager
         }
         catch (Exception ex)
         {
-            Debug.LogError(ex);
+            Debug.LogException(ex);
             return;
         }
     }
@@ -122,12 +121,12 @@ public class PoolingManager
         }
         catch (Exception ex)
         {
-            Debug.LogError(ex);
+            Debug.LogException(ex);
             return;
         }
     }
 
-    public static GameObject PopObject(string name)
+    public static GameObject PopObject(string name, bool isCreate = true)
     {
         try
         {
@@ -139,7 +138,7 @@ public class PoolingManager
 
             Queue<GameObject> q = poolDictionary[name];
 
-            if (q.Count == 1)
+            if (isCreate == true && q.Count == 1)
             {
                 CreatePool(name, q.Peek().transform.parent, 1);
             }
@@ -160,7 +159,7 @@ public class PoolingManager
         }
         catch (Exception ex)
         {
-            Debug.LogError(ex);
+            Debug.LogException(ex);
             return null;
         }
     }
