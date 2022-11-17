@@ -1067,12 +1067,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e3217161d3178c4b8ffaba9b9ccdc65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageSOList: {fileID: 11400000, guid: 8306ab9e34eb13d4ba19c2c72b8ab0fb, type: 2}
-  stage: {fileID: 8499073543707369979, guid: e53dd5d7b8218a14aab1dd011412969c, type: 3}
-  parent: {fileID: 1623765290}
-  firstIndex: -1
-  lastIndex: 1
-  stagePanelList: []
+  _stageSOList: {fileID: 11400000, guid: 8306ab9e34eb13d4ba19c2c72b8ab0fb, type: 2}
+  _parent: {fileID: 1623765290}
+  _stagePanelList: []
   scroll: {fileID: 1558219446}
 --- !u!222 &1623765295
 CanvasRenderer:

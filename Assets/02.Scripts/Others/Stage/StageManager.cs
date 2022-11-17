@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class StageManager : MonoBehaviour
 {
     public StageSOList _stageSOList;
-    public GameObject _stage;
     public Transform _parent;
 
     private int _firstIndex = -1;
