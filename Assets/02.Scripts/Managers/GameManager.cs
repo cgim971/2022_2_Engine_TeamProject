@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-
     private void Awake()
     {
+        DontDestroyOnLoad(this.gameObject);
+
         SoundManager.Init();
     }
 
@@ -15,10 +16,6 @@ public class GameManager : MonoSingleton<GameManager>
         if (Input.GetKeyDown(KeyCode.U))
         {
             PlayerPrefs.DeleteAll();
-        }
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            SoundManager.SoundStop( SoundManager.SoundType.BGM);
         }
     }
 

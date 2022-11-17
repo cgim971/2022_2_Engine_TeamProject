@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class PoolingManager
 {
-    public static Dictionary<string, GameObject> poolObjectDictionary = new Dictionary<string, GameObject>();
-    public static Dictionary<string, Queue<GameObject>> poolDictionary = new Dictionary<string, Queue<GameObject>>();
+    public static Dictionary<string, GameObject> _poolObjectDictionary = new Dictionary<string, GameObject>();
+    public static Dictionary<string, Queue<GameObject>> _poolDictionary = new Dictionary<string, Queue<GameObject>>();
 
     public static void CreatePool(string name, Transform parent = null, int count = 5)
     {
@@ -15,7 +15,7 @@ public class PoolingManager
             Queue<GameObject> q = new Queue<GameObject>();
             GameObject prefab = null;
 
-            if (!poolObjectDictionary.ContainsKey(name))
+            if (!_poolObjectDictionary.ContainsKey(name))
             {
                 prefab = Resources.Load<GameObject>($"Prefabs/{name}");
 
@@ -24,11 +24,11 @@ public class PoolingManager
                     throw new Exception("prefab을 찾지 못 하였습니다.");
                 }
 
-                poolObjectDictionary.Add(name, prefab);
+                _poolObjectDictionary.Add(name, prefab);
             }
             else
             {
-                prefab = poolObjectDictionary[name];
+                prefab = _poolObjectDictionary[name];
             }
 
             for (int i = 0; i < count; i++)
@@ -48,16 +48,16 @@ public class PoolingManager
                 q.Enqueue(newPrefab);
             }
 
-            if (!poolDictionary.ContainsKey(name))
+            if (!_poolDictionary.ContainsKey(name))
             {
-                poolDictionary.Add(name, q);
+                _poolDictionary.Add(name, q);
             }
             else
             {
                 int index = q.Count;
                 for (int i = 0; i < index; i++)
                 {
-                    poolDictionary[name].Enqueue(q.Dequeue());
+                    _poolDictionary[name].Enqueue(q.Dequeue());
                 }
             }
         }
@@ -74,7 +74,7 @@ public class PoolingManager
             Queue<GameObject> q = new Queue<GameObject>();
             GameObject prefab = null;
 
-            if (!poolObjectDictionary.ContainsKey(name))
+            if (!_poolObjectDictionary.ContainsKey(name))
             {
                 prefab = Resources.Load<GameObject>($"Prefabs/{address}/{name}");
 
@@ -83,11 +83,11 @@ public class PoolingManager
                     throw new Exception("prefab을 찾지 못 하였습니다.");
                 }
 
-                poolObjectDictionary.Add(name, prefab);
+                _poolObjectDictionary.Add(name, prefab);
             }
             else
             {
-                prefab = poolObjectDictionary[name];
+                prefab = _poolObjectDictionary[name];
             }
 
             for (int i = 0; i < count; i++)
@@ -107,15 +107,15 @@ public class PoolingManager
                 q.Enqueue(newPrefab);
             }
 
-            if (!poolDictionary.ContainsKey(name))
+            if (!_poolDictionary.ContainsKey(name))
             {
-                poolDictionary.Add(name, q);
+                _poolDictionary.Add(name, q);
             }
             else
             {
                 for (int i = 0; i < q.Count; i++)
                 {
-                    poolDictionary[name].Enqueue(q.Dequeue());
+                    _poolDictionary[name].Enqueue(q.Dequeue());
                 }
             }
         }
@@ -131,12 +131,12 @@ public class PoolingManager
         try
         {
             GameObject returnObj = null;
-            if (!poolDictionary.ContainsKey(name))
+            if (!_poolDictionary.ContainsKey(name))
             {
                 throw new Exception("Not pooled");
             }
 
-            Queue<GameObject> q = poolDictionary[name];
+            Queue<GameObject> q = _poolDictionary[name];
 
             if (isCreate == true && q.Count == 1)
             {
@@ -166,21 +166,21 @@ public class PoolingManager
 
     public static void PushObject(string name, GameObject obj, Transform parent = null)
     {
-        if (poolDictionary.ContainsKey(name))
+        if (_poolDictionary.ContainsKey(name))
         {
             obj.SetActive(false);
             if (parent != null)
                 obj.transform.SetParent(parent);
             obj.transform.SetAsLastSibling();
-            poolDictionary[name].Enqueue(obj);
+            _poolDictionary[name].Enqueue(obj);
         }
     }
 
     public static bool PooledCheck(string name)
     {
-        if (poolDictionary.ContainsKey(name))
+        if (_poolDictionary.ContainsKey(name))
         {
-            return poolDictionary[name].Count > 0;
+            return _poolDictionary[name].Count > 0;
         }
         return false;
     }

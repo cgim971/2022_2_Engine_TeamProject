@@ -12,6 +12,7 @@ public class SoundManager
         BGM,
         EFFECT,
     }
+
     public struct SoundInfo
     {
         public string soundName;
@@ -19,11 +20,11 @@ public class SoundManager
         public bool isSound;
     }
 
-    public static Dictionary<string, AudioClip> soundClipDictionary = new Dictionary<string, AudioClip>();
-    public static Dictionary<SoundType, AudioSource> soundTypeDictionary = new Dictionary<SoundType, AudioSource>();
+    public static Dictionary<string, AudioClip> _soundClipDictionary = new Dictionary<string, AudioClip>();
+    public static Dictionary<SoundType, AudioSource> _soundTypeDictionary = new Dictionary<SoundType, AudioSource>();
 
-    static GameObject root = null;
-    static GameObject soundObject = null;
+    public static GameObject _root = null;
+    public static GameObject _soundObject = null;
 
     public static SoundInfo SetSoundInfo(string soundName, SoundType soundType, bool isSound = true)
     {
@@ -41,22 +42,19 @@ public class SoundManager
     {
         try
         {
-            root = GameObject.Find("@Sound");
-            if (root == null)
+            _root = GameObject.Find("@Sound");
+            if (_root == null)
             {
-                throw new Exception("Could not find \"@Sound\"");
+                _root = new GameObject { name = "@Sound" };
             }
 
-            soundObject = Resources.Load<GameObject>("Prefabs/SoundObject");
-            if (soundObject == null)
-            {
-                throw new Exception("Could not find \"SoundObject\"");
-            }
+            _soundObject = new GameObject { name = "SoundObject" };
 
             CreateSound(SetSoundInfo("BGM", SoundType.BGM));
             CreateSound(SetSoundInfo("EFFECTS", SoundType.EFFECT, false));
 
-            SoundPlay("BGM", SoundType.BGM);
+            // 배경음 시작
+            //SoundPlay("BGM", SoundType.BGM);
         }
         catch (Exception ex)
         {
@@ -67,10 +65,10 @@ public class SoundManager
 
     public static void CreateSound(SoundInfo soundInfo)
     {
-        Transform soundParent = root.transform;
+        Transform soundParent = _root.transform;
         string soundName = soundInfo.soundName;
 
-        GameObject newSoundObj = GameObject.Instantiate(soundObject, soundParent);
+        GameObject newSoundObj = GameObject.Instantiate(_soundObject, soundParent);
         newSoundObj.name = soundName;
 
         AudioSource sound = newSoundObj.AddComponent<AudioSource>();
@@ -89,18 +87,18 @@ public class SoundManager
         sound.playOnAwake = false;
 
 
-        if (!soundTypeDictionary.ContainsKey(soundInfo.soundType))
+        if (!_soundTypeDictionary.ContainsKey(soundInfo.soundType))
         {
-            soundTypeDictionary.Add(soundInfo.soundType, sound);
+            _soundTypeDictionary.Add(soundInfo.soundType, sound);
         }
     }
 
     public static AudioClip SoundClip(string soundName)
     {
         AudioClip clip = null;
-        if (soundClipDictionary.ContainsKey(soundName))
+        if (_soundClipDictionary.ContainsKey(soundName))
         {
-            clip = soundClipDictionary[soundName];
+            clip = _soundClipDictionary[soundName];
         }
         else
         {
@@ -109,7 +107,7 @@ public class SoundManager
             {
                 throw new Exception("Could not find clip");
             }
-            soundClipDictionary.Add(soundName, clip);
+            _soundClipDictionary.Add(soundName, clip);
         }
 
         return clip;
@@ -119,9 +117,9 @@ public class SoundManager
     {
         try
         {
-            if (soundTypeDictionary.ContainsKey(soundType))
+            if (_soundTypeDictionary.ContainsKey(soundType))
             {
-                AudioSource sound = soundTypeDictionary[soundType];
+                AudioSource sound = _soundTypeDictionary[soundType];
                 if (sound == null)
                 {
                     throw new Exception("Could not find AudioSource");
@@ -158,9 +156,9 @@ public class SoundManager
     {
         try
         {
-            if (soundTypeDictionary.ContainsKey(soundType))
+            if (_soundTypeDictionary.ContainsKey(soundType))
             {
-                AudioSource sound = soundTypeDictionary[soundType];
+                AudioSource sound = _soundTypeDictionary[soundType];
                 if (sound.isPlaying)
                     sound.Stop();
             }

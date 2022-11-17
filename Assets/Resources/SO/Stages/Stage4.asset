@@ -12,7 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d63cd6694e56d14f8035b4578a3e5f8, type: 3}
   m_Name: Stage4
   m_EditorClassIdentifier: 
-  stageTitle: asdfasd
-  stageIndex: 4
-  stageInfo: asdfsdfsfsf
-  stageSprite: {fileID: 0}
+  _stageTitle: chanhee
+  _stageIndex: 4

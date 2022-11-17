@@ -27,21 +27,24 @@ public class StageInfo : MonoBehaviour, IPoolable
     private void Awake()
     {
         selectBtn = transform.Find("selectBtn").GetComponent<Button>();
-        selectBtn.onClick.AddListener(() =>
-        {
-            Debug.Log("stage select");
-        });
+        selectBtn.onClick.AddListener(() => SelectStage());
         stageTitleTxt = selectBtn.transform.Find("StageTitleTxt").GetComponent<TextMeshProUGUI>();
     }
 
     public void SetStageInfo()
     {
-        stageTitleTxt.text = $"{stageSO.stageTitle}";
+        stageTitleTxt.text = $"{stageSO._stageTitle}";
+    }
+
+    public void SelectStage()
+    {
+        SceneManager.LoadScene($"STAGE_{stageSO._stageIndex}");
+        SceneManager.LoadScene("GameUI", UnityEngine.SceneManagement.LoadSceneMode.Additive);
     }
 
     public void OnPool()
     {
-        
+
     }
 
     public void PushObj() => PoolingManager.PushObject(NAME, this.gameObject);
