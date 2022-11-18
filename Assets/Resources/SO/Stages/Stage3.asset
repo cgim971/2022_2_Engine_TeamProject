@@ -12,7 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d63cd6694e56d14f8035b4578a3e5f8, type: 3}
   m_Name: Stage3
   m_EditorClassIdentifier: 
-  stageTitle: 2
-  stageIndex: 3
-  stageInfo: daf
-  stageSprite: {fileID: 0}
+  _stageTitle: angry
+  _stageIndex: 3

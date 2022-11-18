@@ -12,7 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d63cd6694e56d14f8035b4578a3e5f8, type: 3}
   m_Name: Stage1
   m_EditorClassIdentifier: 
-  stageTitle: a
-  stageIndex: 1
-  stageInfo: saf
-  stageSprite: {fileID: 0}
+  _stageTitle: happy
+  _stageIndex: 1
