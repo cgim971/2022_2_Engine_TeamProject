@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: decb15b6d15daa84db798e37e34a22a7, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -235,6 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bcdff0c98b8df345a6639a4a819475b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _moreUse: 0
 --- !u!65 &291875797
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -343,6 +344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f319c733868304a4f964eb2a8d8d9dd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _moreUse: 0
 --- !u!65 &375591517
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -375,7 +377,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 374f87e2f349a3946bb214245524b43c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -715,7 +717,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 94b55e68d07512e40ad4fa0c0bcb2082, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -797,7 +799,7 @@ Camera:
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -1093,6 +1095,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c58fc737e2c23fe439b4d4c958b6f0c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _moreUse: 0
 --- !u!65 &1407003778
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1233,6 +1236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f319c733868304a4f964eb2a8d8d9dd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _moreUse: 0
 --- !u!65 &1513957335
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1265,7 +1269,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 374f87e2f349a3946bb214245524b43c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1429,6 +1433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c58fc737e2c23fe439b4d4c958b6f0c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _moreUse: 0
 --- !u!65 &1641777670
 BoxCollider:
   m_ObjectHideFlags: 0

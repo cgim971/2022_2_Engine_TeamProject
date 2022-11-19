@@ -5,6 +5,7 @@ using UnityEngine;
 public class JumpRing : MonoBehaviour
 {
     private bool _useFlag = false;
+    [SerializeField] private bool _moreUse = false;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -16,7 +17,7 @@ public class JumpRing : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player") && _useFlag)
+        if (other.CompareTag("Player") && _useFlag && _moreUse)
         {
             _useFlag = false;
         }
