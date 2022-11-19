@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class Pattern1 : MonoBehaviour
+public class Pattern2 : MonoBehaviour
 {
     [SerializeField] private GameObject player;
 
@@ -55,7 +55,7 @@ public class Pattern1 : MonoBehaviour
 
         if (Physics.Raycast(transform.position, dir, out hit))
         {
-            if(hit.collider.CompareTag("Player"))
+            if (hit.collider.CompareTag("Player"))
             {
                 Debug.Log("Hit");
             }
@@ -66,15 +66,15 @@ public class Pattern1 : MonoBehaviour
     {
         RaycastHit hit;
 
-        if(Physics.Raycast(transform.position, transform.forward, out hit))
+        if (Physics.Raycast(transform.position, transform.forward, out hit))
         {
-            if(hit.collider.CompareTag("Player"))
+            if (hit.collider.CompareTag("Player"))
             {
                 Debug.Log("Player hit");
 
-                
+
             }
-        }   
+        }
 
     }
 
@@ -85,4 +85,3 @@ public class Pattern1 : MonoBehaviour
 
     }
 }
- 
