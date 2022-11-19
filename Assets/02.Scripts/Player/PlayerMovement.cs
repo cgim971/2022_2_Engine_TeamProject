@@ -27,10 +27,7 @@ public class PlayerMovement : MonoBehaviour
     private LayerMask _groundLayer;
     #endregion
 
-    private void Awake()
-    {
-        Init();
-    }
+    private void Awake() => Init();
     public void Init()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -41,7 +38,6 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void Start() => StartCoroutine(InputTouch());
-
     private IEnumerator InputTouch()
     {
         while (true)
@@ -50,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
             yield return new WaitUntil(() => Input.GetMouseButtonUp(0) || CheckGround());
 
             Jump();
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(0.05f);
         }
     }
 
@@ -60,16 +56,9 @@ public class PlayerMovement : MonoBehaviour
         CameraMove();
     }
 
-    public void CameraMove()
-    {
-        _cameraController.ZPOSVALUE = transform.position.z;
-    }
+    public void TurnObject() => _dir *= -1;
 
-    public void Move()
-    {
-        _rigidbody.MovePosition(this.gameObject.transform.position + _dir * _speed * Time.deltaTime);
-    }
-
+    public void Move() => _rigidbody.MovePosition(this.gameObject.transform.position + _dir * _speed * Time.deltaTime);
     public bool CheckGround()
     {
         if (Physics.Raycast(transform.position - (_customGravity.GRAVITY * -1 * 0.2f), _customGravity.GRAVITY, 0.4f, _groundLayer))
@@ -79,6 +68,8 @@ public class PlayerMovement : MonoBehaviour
         }
         return false;
     }
+    public void CameraMove() => _cameraController.ZPOSVALUE = transform.position.z;
+
     public void Jump()
     {
         if (CheckGround() || _jumpExtraCount > 0)

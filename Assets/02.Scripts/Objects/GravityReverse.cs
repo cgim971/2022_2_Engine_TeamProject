@@ -4,14 +4,21 @@ using UnityEngine;
 
 public class GravityReverse : MonoBehaviour
 {
-    private bool useFlag = false;
+    private bool _useFlag = false;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && !useFlag)
+        if (other.CompareTag("Player") && !_useFlag)
         {
-            useFlag = true;
+            _useFlag = true;
             other.GetComponentInParent<CustomGravity>().SetGravity();
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player") && _useFlag)
+        {
+            _useFlag = false;
         }
     }
 }
