@@ -42,6 +42,7 @@ public class StartUIManager : MonoBehaviour
         SceneManager.LoadScene("02.StageSelectScene");
     }
 
+
     public void OnClickInventoryBtn()
     {
         Debug.Log("인벤토리 창 올라옴");

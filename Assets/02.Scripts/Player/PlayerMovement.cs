@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     #region Caching
     private Rigidbody _rigidbody = null;
     private CustomGravity _customGravity = null;
-    private Camera _camera = null;
+    private CameraController _cameraController = null;
     #endregion
 
     #region MoveProperty
@@ -25,8 +25,6 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private LayerMask _groundLayer;
-
-    bool _isTouch = false;
     #endregion
 
     private void Awake()
@@ -37,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody>();
         _customGravity = GetComponent<CustomGravity>();
-        _camera = FindObjectOfType<Camera>();
+        _cameraController = Camera.main.GetComponent<CameraController>();
 
         _groundLayer = LayerMask.GetMask("Ground");
     }
@@ -52,25 +50,26 @@ public class PlayerMovement : MonoBehaviour
             yield return new WaitUntil(() => Input.GetMouseButtonUp(0) || CheckGround());
 
             Jump();
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.01f);
         }
     }
 
-    private void FixedUpdate() => Move();
-    private void LateUpdate() => CameraMove();
+    private void FixedUpdate()
+    {
+        Move();
+        CameraMove();
+    }
 
     public void CameraMove()
     {
-        // 카메라 수정 필요
-
-        Vector3 cameraPos = transform.position + new Vector3(15, _customGravity.ISGRAVITY ? -1 : 1 * 5, 0);
-        _camera.transform.position = cameraPos;
+        _cameraController.ZVALUE = transform.position.z;
     }
 
     public void Move()
     {
         _rigidbody.MovePosition(this.gameObject.transform.position + _dir * _speed * Time.deltaTime);
     }
+
     public bool CheckGround()
     {
         if (Physics.Raycast(transform.position - (_customGravity.GRAVITY * -1 * 0.2f), _customGravity.GRAVITY, 0.4f, _groundLayer))
@@ -89,7 +88,6 @@ public class PlayerMovement : MonoBehaviour
             _rigidbody.velocity = Vector3.zero;
 
             Vector3 jumpPower = _customGravity.GRAVITY * -1 * _jumpPower;
-            Debug.Log(jumpPower);
             _rigidbody.AddForce(jumpPower, ForceMode.VelocityChange);
         }
     }

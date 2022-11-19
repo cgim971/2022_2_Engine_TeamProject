@@ -6,17 +6,19 @@ using TMPro;
 
 public class StageInfo : MonoBehaviour, IPoolable
 {
-    Button selectBtn;
-    TextMeshProUGUI stageTitleTxt;
+    private Button _selectBtn;
+    private TextMeshProUGUI _stageTitleTxt;
+    private TextMeshProUGUI _stageLvTxt;
 
-    public StageSO stageSO;
+
+    public StageSO _stageSO;
 
     public StageSO STAGESO
     {
-        get => stageSO;
+        get => _stageSO;
         set
         {
-            stageSO = value;
+            _stageSO = value;
             SetStageInfo();
         }
     }
@@ -26,26 +28,31 @@ public class StageInfo : MonoBehaviour, IPoolable
 
     private void Awake()
     {
-        selectBtn = transform.Find("selectBtn").GetComponent<Button>();
-        selectBtn.onClick.AddListener(() => SelectStage());
-        stageTitleTxt = selectBtn.transform.Find("StageTitleTxt").GetComponent<TextMeshProUGUI>();
+        Init();
+    }
+
+    public void Init()
+    {
+        _selectBtn = transform.Find("selectBtn").GetComponent<Button>();
+        _selectBtn.onClick.AddListener(() => SelectStage());
+
+        _stageTitleTxt = _selectBtn.transform.Find("StageTitleTxt").GetComponent<TextMeshProUGUI>();
+        _stageLvTxt = _selectBtn.transform.Find("StageLvTxt").GetComponent<TextMeshProUGUI>();
     }
 
     public void SetStageInfo()
     {
-        stageTitleTxt.text = $"{stageSO._stageTitle}";
+        _stageTitleTxt.text = $"{_stageSO._stageTitle}";
+        _stageLvTxt.text = $"{_stageSO._stageIndex}";
     }
 
     public void SelectStage()
     {
-        SceneManager.LoadScene($"STAGE_{stageSO._stageIndex}");
+        SceneManager.LoadScene($"STAGE_{_stageSO._stageIndex}");
         SceneManager.LoadScene("GameUI", UnityEngine.SceneManagement.LoadSceneMode.Additive);
     }
 
-    public void OnPool()
-    {
-
-    }
+    public void OnPool() { }
 
     public void PushObj() => PoolingManager.PushObject(NAME, this.gameObject);
 }

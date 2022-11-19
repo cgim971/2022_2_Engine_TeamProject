@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class StageManager : MonoBehaviour
+public class StageManager : MonoBehaviour, IBeginDragHandler, IDragHandler, IScrollHandler
 {
     public StageSOList _stageSOList;
     public Transform _parent;
@@ -26,43 +27,30 @@ public class StageManager : MonoBehaviour
         {
             OnEndDrag();
             isDrag = false;
-            scroll.value = Mathf.Lerp(scroll.value, 0.5f, 0.1f);
         }
 
-        if (!isDrag) scroll.value = Mathf.Lerp(scroll.value, 0.5f, 0.1f);
+        if (!isDrag) scroll.value = 0.5f;
     }
 
     public void OnEndDrag()
     {
         float dis = scroll.value;
-        if (0.65f < dis)
+        if (0.6f <= dis)
         {
-            Debug.Log("¿À¸¥ÂÊ");
-            GameObject newObj = PoolingManager.PopObject("Panel");
-            newObj.transform.SetAsLastSibling();
-
             _lastIndex += 1;
             if (_stageSOList._stageList.Count - 1 < _lastIndex) _lastIndex = 0;
-
-            newObj.GetComponent<StageInfo>().STAGESO = _stageSOList._stageList[_lastIndex];
-            _stagePanelList[_lastIndex] = newObj;
+            CreatePanel(_lastIndex, true);
 
             _stagePanelList[_firstIndex].GetComponent<IPoolable>().PushObj();
             _stagePanelList[_firstIndex] = null;
             _firstIndex += 1;
             if (_stageSOList._stageList.Count - 1 < _firstIndex) _firstIndex = 0;
         }
-        else if (dis < 0.35f)
+        else if (dis <= 0.4f)
         {
-            Debug.Log("¿ÞÂÊ");
-            GameObject newObj = PoolingManager.PopObject("Panel");
-            newObj.transform.SetAsFirstSibling();
-
             _firstIndex -= 1;
             if (_firstIndex < 0) _firstIndex = _stageSOList._stageList.Count - 1;
-
-            newObj.GetComponent<StageInfo>().STAGESO = _stageSOList._stageList[_firstIndex];
-            _stagePanelList[_firstIndex] = newObj;
+            CreatePanel(_firstIndex, false);
 
             _stagePanelList[_lastIndex].GetComponent<IPoolable>().PushObj();
             _stagePanelList[_lastIndex] = null;
@@ -73,7 +61,7 @@ public class StageManager : MonoBehaviour
 
     #endregion
 
-    private void Start()
+    private void Awake()
     {
         for (int i = 0; i < _stageSOList._stageList.Count; i++)
         {
@@ -85,24 +73,37 @@ public class StageManager : MonoBehaviour
 
         PoolingManager.CreatePool("Panel", "UI", _parent);
 
+        CreatePanel(0, true);
+        CreatePanel(_firstIndex, false);
+        CreatePanel(_lastIndex, true);
+    }
+    public void CreatePanel(int index, bool lastSibling = false)
+    {
         GameObject newObj = PoolingManager.PopObject("Panel");
-        newObj.transform.SetAsLastSibling();
-        newObj.GetComponent<StageInfo>().STAGESO = _stageSOList._stageList[0];
+        if (lastSibling == false)
+        {
+            newObj.transform.SetAsFirstSibling();
+        }
+        else
+        {
+            newObj.transform.SetAsLastSibling();
+        }
+        newObj.GetComponent<StageInfo>().STAGESO = _stageSOList._stageList[index];
+        _stagePanelList[index] = newObj;
+    }
 
-        _stagePanelList[0] = newObj;
+    public void OnBeginDrag(PointerEventData eventData)
+    {
 
-        newObj = PoolingManager.PopObject("Panel");
-        newObj.transform.SetAsFirstSibling();
-        newObj.GetComponent<StageInfo>().STAGESO = _stageSOList._stageList[_firstIndex];
+    }
 
-        _stagePanelList[_firstIndex] = newObj;
+    public void OnDrag(PointerEventData eventData)
+    {
 
-        newObj = PoolingManager.PopObject("Panel");
-        newObj.transform.SetAsLastSibling();
-        newObj.GetComponent<StageInfo>().STAGESO = _stageSOList._stageList[_lastIndex];
+    }
 
-        _stagePanelList[_lastIndex] = newObj;
+    public void OnScroll(PointerEventData eventData)
+    {
 
-        scroll.value = 0.5f;
     }
 }

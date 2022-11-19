@@ -4,17 +4,14 @@ using UnityEngine;
 
 public class JumpRing : MonoBehaviour
 {
-    private bool useFlag = false;
+    private bool _useFlag = false;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && !useFlag)
+        if (other.CompareTag("Player") && !_useFlag)
         {
-            useFlag = true;
-            //other.GetComponent<>();
-            Debug.Log("AA");
+            _useFlag = true;
             other.GetComponentInParent<PlayerMovement>().JUMPEXTRACOUNT += 1;
-            //TODO : 점프가능 트리거 초기화 함수 호출 or 트리거 변경
         }
     }
 }
