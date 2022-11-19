@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class CameraController : MonoBehaviour
 {
@@ -40,6 +41,7 @@ public class CameraController : MonoBehaviour
         }
     }
 
+
     private Vector3 _rotationValue = Vector3.zero;
     private float _xRotationValue = 0f;
     public float XROTATIONVALUE
@@ -76,7 +78,9 @@ public class CameraController : MonoBehaviour
     private void LateUpdate() => CameraMove();
     private void CameraMove()
     {
-        transform.position = _posValue; //Vector3.Lerp(transform.position,_valuePos, 0.04f);
-        transform.rotation = Quaternion.Euler(_rotationValue);
+        //transform.DOMove(_posValue, 0.05f); 
+        
+        transform.position = new Vector3(Mathf.Lerp(transform.position.x, _posValue.x, 0.05f), Mathf.Lerp(transform.position.y, _posValue.y, 0.05f), _posValue.z);
+        transform.DORotate(_rotationValue, 0.1f);
     }
 }
