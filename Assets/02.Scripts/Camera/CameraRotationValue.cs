@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraValue : MonoBehaviour
+public class CameraRotationValue : MonoBehaviour
 {
     private bool _useFlag = false;
 
@@ -10,8 +10,7 @@ public class CameraValue : MonoBehaviour
     [SerializeField] private bool _isYValue = false;
     [SerializeField] private bool _isZValue = false;
 
-    [SerializeField] private Vector3 _valuePos= Vector3.zero;
-
+    [SerializeField] private Vector3 _valueRotation = Vector3.zero;
 
     private CameraController _cameraController = null;
 
@@ -26,11 +25,9 @@ public class CameraValue : MonoBehaviour
         {
             _useFlag = true;
 
-            if (_isXValue) _cameraController.XVALUE = _valuePos.x;
-            if (_isYValue) _cameraController.YVALUE = _valuePos.y;
-            if (_isZValue) _cameraController.ZVALUE = _valuePos.z;
+            if (_isXValue) _cameraController.XROTATIONVALUE = _valueRotation.x;
+            if (_isYValue) _cameraController.YROTATIONVALUE = _valueRotation.y;
+            if (_isZValue) _cameraController.ZROTATIONVALUE = _valueRotation.z;
         }
     }
-
-
 }

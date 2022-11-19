@@ -5,38 +5,70 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     #region VALUE property
-    private Vector3 _valuePos = Vector3.zero;
+    private Vector3 _posValue = Vector3.zero;
 
-    private float _xValue = 0f;
-    public float XVALUE
+    private float _xPosValue = 0f;
+    public float XPOSVALUE
     {
-        get => _xValue;
+        get => _xPosValue;
         set
         {
-            _xValue = value;
-            _valuePos.x = _xValue;
+            _xPosValue = value;
+            _posValue.x = _xPosValue;
         }
     }
 
-    private float _yValue = 0f;
-    public float YVALUE
+    private float _yPosValue = 0f;
+    public float YPOSVALUE
     {
-        get => _yValue;
+        get => _yPosValue;
         set
         {
-            _yValue = value;
-            _valuePos.y = _yValue;
+            _yPosValue = value;
+            _posValue.y = _yPosValue;
         }
     }
 
-    private float _zValue = 0f;
-    public float ZVALUE
+    private float _zPosValue = 0f;
+    public float ZPOSVALUE
     {
-        get => _zValue;
+        get => _zPosValue;
         set
         {
-            _zValue = value;
-            _valuePos.z = _zValue;
+            _zPosValue = value;
+            _posValue.z = _zPosValue;
+        }
+    }
+
+    private Vector3 _rotationValue = Vector3.zero;
+    private float _xRotationValue = 0f;
+    public float XROTATIONVALUE
+    {
+        get => _xRotationValue;
+        set
+        {
+            _xRotationValue = value;
+            _rotationValue.x = _xRotationValue;
+        }
+    }
+    private float _yRotationValue = 0f;
+    public float YROTATIONVALUE
+    {
+        get => _yRotationValue;
+        set
+        {
+            _yRotationValue = value;
+            _rotationValue.y = _yRotationValue;
+        }
+    }
+    private float _zRotationValue = 0f;
+    public float ZROTATIONVALUE
+    {
+        get => _zRotationValue;
+        set
+        {
+            _zRotationValue = value;
+            _rotationValue.z = _zRotationValue;
         }
     }
     #endregion
@@ -44,6 +76,7 @@ public class CameraController : MonoBehaviour
     private void LateUpdate() => CameraMove();
     private void CameraMove()
     {
-        transform.position = _valuePos; //Vector3.Lerp(transform.position,_valuePos, 0.04f) ;
+        transform.position = _posValue; //Vector3.Lerp(transform.position,_valuePos, 0.04f);
+        transform.rotation = Quaternion.Euler(_rotationValue);
     }
 }

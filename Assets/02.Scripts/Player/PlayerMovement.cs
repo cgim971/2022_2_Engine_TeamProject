@@ -62,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void CameraMove()
     {
-        _cameraController.ZVALUE = transform.position.z;
+        _cameraController.ZPOSVALUE = transform.position.z;
     }
 
     public void Move()
