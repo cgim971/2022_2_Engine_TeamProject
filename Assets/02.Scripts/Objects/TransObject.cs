@@ -16,11 +16,11 @@ public class TransObject : MonoBehaviour
         }
     }
 
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    if (other.CompareTag("Player") && _useFlag&&_moreUse)
-    //    {
-    //        _useFlag = false;
-    //    }
-    //}
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player") && _useFlag && _moreUse)
+        {
+            _useFlag = false;
+        }
+    }
 }

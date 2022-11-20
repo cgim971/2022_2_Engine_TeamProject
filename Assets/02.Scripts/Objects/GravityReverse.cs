@@ -13,6 +13,7 @@ public class GravityReverse : MonoBehaviour
         {
             _useFlag = true;
             other.GetComponentInParent<CustomGravity>().SetGravity();
+            other.GetComponentInParent<PlayerMovement>().JUMPEXTRACOUNT = 0;
         }
     }
     private void OnTriggerExit(Collider other)
