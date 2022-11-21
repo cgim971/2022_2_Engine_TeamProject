@@ -12,7 +12,7 @@ public class TurnObject : MonoBehaviour
         if (other.CompareTag("Player") && !_useFlag)
         {
             _useFlag = true;
-            other.GetComponentInParent<PlayerMovement>().TurnObject();
+            other.GetComponentInParent<PlayerMovement_Base>().TurnObject();
         }
     }
 

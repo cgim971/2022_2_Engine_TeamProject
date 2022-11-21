@@ -12,7 +12,7 @@ public class JumpRing : MonoBehaviour
         if (other.CompareTag("Player") && !_useFlag)
         {
             _useFlag = true;
-            other.GetComponentInParent<PlayerMovement>().JUMPEXTRACOUNT += 1;
+            other.GetComponentInParent<PlayerMovement_Base>().JUMPEXTRACOUNT += 1;
         }
     }
     private void OnTriggerExit(Collider other)
