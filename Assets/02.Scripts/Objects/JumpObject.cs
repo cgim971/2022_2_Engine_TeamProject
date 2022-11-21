@@ -2,25 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JumpObject : MonoBehaviour
+public class JumpObject : Object_Base
 {
-    private bool _useFlag = false;
-    [SerializeField] private bool _moreUse = false;
-
-    private void OnTriggerEnter(Collider other)
+    public override void EffectStart(GameObject obj)
     {
-        if (other.CompareTag("Player") && !_useFlag)
-        {
-            _useFlag = true;
-            other.GetComponentInParent<PlayerMovement_Base>().Jumping();
-        }
+        obj.GetComponentInParent<PlayerMovement_Base>().Jumping();
     }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player") && _useFlag && _moreUse)
-        {
-            _useFlag = false;
-        }
-    }
+    public override void EffectEnd(GameObject obj) { }
 }

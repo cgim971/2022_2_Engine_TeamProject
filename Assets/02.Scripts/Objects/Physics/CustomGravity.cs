@@ -19,15 +19,18 @@ public class CustomGravity : MonoBehaviour
     private Vector3 _gravity = Vector3.down;
     public Vector3 GRAVITY => _gravity;
 
-    void OnEnable()
+    private void Awake() => Init();
+    void Init()
     {
         _rigidbody = GetComponent<Rigidbody>();
         _rigidbody.useGravity = false;
     }
 
-    void FixedUpdate()
+    void FixedUpdate() => Gravity();
+
+    private void Gravity()
     {
-        Vector3 gravity = _globalGravity * _gravityScale * Vector3.up;
+        Vector3 gravity = _globalGravity * _gravityScale * (_gravity * -1);
         _rigidbody.AddForce(gravity, ForceMode.Acceleration);
     }
 
@@ -35,7 +38,6 @@ public class CustomGravity : MonoBehaviour
     {
         _isGravity = !_isGravity;
         _gravity *= -1;
-        _gravityScale *= -1f;
         //GetComponent<ParticleSystem>().Play();
     }
 }

@@ -2,25 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GravityReverse : MonoBehaviour
+public class GravityReverse : Object_Base
 {
-    private bool _useFlag = false;
-    [SerializeField] private bool _moreUse = false;
-
-    private void OnTriggerEnter(Collider other)
+    public override void EffectStart(GameObject obj)
     {
-        if (other.CompareTag("Player") && !_useFlag)
-        {
-            _useFlag = true;
-            other.GetComponentInParent<CustomGravity>().SetGravity();
-            other.GetComponentInParent<PlayerMovement_Base>().JUMPEXTRACOUNT = 0;
-        }
+        obj.GetComponentInParent<CustomGravity>().SetGravity();
+        obj.GetComponentInParent<PlayerMovement_Base>().JUMPEXTRACOUNT = 0;
     }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player") && _useFlag && _moreUse)
-        {
-            _useFlag = false;
-        }
-    }
+    public override void EffectEnd(GameObject obj) { }
 }
