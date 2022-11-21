@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GravityReverse : Object_Base
+public class GravityReverseObject : Object_Base
 {
     public override void EffectStart(GameObject obj)
     {

@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraRotationValue : MonoBehaviour
+public class CameraRotationObject : Object_Base
 {
-    private bool _useFlag = false;
-
     [SerializeField] private bool _isXValue = false;
     [SerializeField] private bool _isYValue = false;
     [SerializeField] private bool _isZValue = false;
@@ -19,15 +17,11 @@ public class CameraRotationValue : MonoBehaviour
         _cameraController = Camera.main.GetComponent<CameraController>();
     }
 
-    public void OnTriggerEnter(Collider other)
+    public override void EffectStart(GameObject obj)
     {
-        if (other.CompareTag("Player") && !_useFlag)
-        {
-            _useFlag = true;
-
-            if (_isXValue) _cameraController.XROTATIONVALUE = _valueRotation.x;
-            if (_isYValue) _cameraController.YROTATIONVALUE = _valueRotation.y;
-            if (_isZValue) _cameraController.ZROTATIONVALUE = _valueRotation.z;
-        }
+        if (_isXValue) _cameraController.XROTATIONVALUE = _valueRotation.x;
+        if (_isYValue) _cameraController.YROTATIONVALUE = _valueRotation.y;
+        if (_isZValue) _cameraController.ZROTATIONVALUE = _valueRotation.z;
     }
+    public override void EffectEnd(GameObject obj)  {  }
 }
