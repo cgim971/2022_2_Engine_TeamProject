@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[RequireComponent(typeof(CustomGravity))]
-public class PlayerMovement : PlayerMovement_Base
+public class PlayerMovement_Cube : PlayerMovement_Base
 {
-    private void Start() => StartCoroutine(InputTouch());
+    public override void Start()
+    {
+        base.Start();
+        StartCoroutine(InputTouch());
+    }
+
     private IEnumerator InputTouch()
     {
         while (true)
