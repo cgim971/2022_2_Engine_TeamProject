@@ -25,7 +25,7 @@ public abstract class PlayerMovement_Base : MonoBehaviour
     protected LayerMask _groundLayer;
     #endregion
 
-    public virtual void Start() => Init();
+    private void Awake() => Init();
 
     void Init()
     {

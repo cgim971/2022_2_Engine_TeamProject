@@ -5,13 +5,11 @@ using UnityEngine;
 
 public class PlayerMovement_Cube : PlayerMovement_Base
 {
-    public override void Start()
-    {
-        base.Start();
-    }
 
     public override void UseInit()
     {
+        _customGravity.ISGRAVITY = true;
+
         StartCoroutine(InputTouch());
     }
 
