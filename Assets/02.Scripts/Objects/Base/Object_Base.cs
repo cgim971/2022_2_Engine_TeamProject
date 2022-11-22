@@ -14,7 +14,7 @@ public abstract class Object_Base : MonoBehaviour
             _useFlag = true;
             EffectStart(other.gameObject);
         }
-    }
+        }
 
     private void OnTriggerExit(Collider other)
     {
