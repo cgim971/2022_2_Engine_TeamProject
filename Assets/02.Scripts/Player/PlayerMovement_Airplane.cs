@@ -9,6 +9,11 @@ public class PlayerMovement_Airplane : PlayerMovement_Base
         base.Start();
     }
 
+    public override void UseInit()
+    {
+
+    }
+
     public override bool CheckGround()
     {
         return true;
@@ -22,4 +27,5 @@ public class PlayerMovement_Airplane : PlayerMovement_Base
     {
         _rigidbody.MovePosition(this.gameObject.transform.position + _dir * _speed * Time.deltaTime);
     }
+
 }

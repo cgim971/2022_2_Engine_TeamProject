@@ -37,6 +37,9 @@ public abstract class PlayerMovement_Base : MonoBehaviour
         _groundLayer = LayerMask.GetMask("Ground");
     }
 
+    public abstract void UseInit();
+    
+
     private void FixedUpdate()
     {
         Move();

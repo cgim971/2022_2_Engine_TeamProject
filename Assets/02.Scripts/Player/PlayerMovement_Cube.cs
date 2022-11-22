@@ -8,6 +8,10 @@ public class PlayerMovement_Cube : PlayerMovement_Base
     public override void Start()
     {
         base.Start();
+    }
+
+    public override void UseInit()
+    {
         StartCoroutine(InputTouch());
     }
 
@@ -51,4 +55,5 @@ public class PlayerMovement_Cube : PlayerMovement_Base
             Jumping();
         }
     }
+
 }

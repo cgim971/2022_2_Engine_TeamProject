@@ -391,8 +391,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4605899739956275552, guid: 2e781ccf9fa54c9409e236c400a88d8b, type: 3}
+      propertyPath: _useYValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4605899739956275552, guid: 2e781ccf9fa54c9409e236c400a88d8b, type: 3}
       propertyPath: _valueRotation.y
       value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4605899739956275555, guid: 2e781ccf9fa54c9409e236c400a88d8b, type: 3}
+      propertyPath: _useXValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4605899739956275555, guid: 2e781ccf9fa54c9409e236c400a88d8b, type: 3}
+      propertyPath: _useYValue
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4605899739956275555, guid: 2e781ccf9fa54c9409e236c400a88d8b, type: 3}
       propertyPath: _valuePos.x

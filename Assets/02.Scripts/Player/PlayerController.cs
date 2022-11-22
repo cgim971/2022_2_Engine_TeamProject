@@ -59,6 +59,9 @@ public class PlayerController : MonoBehaviour
             _currentPlayerMode = mode;
         }
         if (_currentPlayerMode != PlayerMode.NONE)
+        {
             _playerMovementTypeDictionary[_currentPlayerMode].gameObject.SetActive(true);
+            _playerMovementTypeDictionary[_currentPlayerMode].UseInit();
+        }
     }
 }

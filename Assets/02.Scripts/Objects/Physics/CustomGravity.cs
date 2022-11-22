@@ -27,9 +27,14 @@ public class CustomGravity : MonoBehaviour
         _rigidbody.AddForce(gravity, ForceMode.Acceleration);
     }
 
-    public void SetGravity()
+    public void ReverseGravity()
     {
-        _gravity *= 1;
+        _gravity *= -1;
+        //GetComponent<ParticleSystem>().Play();
+    }
+    public void SetGravity(Vector3 gravity)
+    {
+        _gravity = gravity;
         //GetComponent<ParticleSystem>().Play();
     }
 }
