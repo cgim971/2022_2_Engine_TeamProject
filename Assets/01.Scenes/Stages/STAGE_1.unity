@@ -416,7 +416,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7618246909919247057, guid: 9421001f704dcbc428f9c12a32b22fe2, type: 3}
       propertyPath: m_Name
-      value: TransObject
+      value: Object
       objectReference: {fileID: 0}
     - target: {fileID: 7618246909919247059, guid: 9421001f704dcbc428f9c12a32b22fe2, type: 3}
       propertyPath: _playerMode
@@ -615,6 +615,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ab9f71d6ab3bd1448bc09b23ca57c80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _time: 0.05
 --- !u!1 &1753147157
 GameObject:
   m_ObjectHideFlags: 0
@@ -717,6 +718,10 @@ PrefabInstance:
     - target: {fileID: 3819631815852312019, guid: 251244a368bc84f429905b2b05a42b73, type: 3}
       propertyPath: m_Name
       value: GravityReverseObject
+      objectReference: {fileID: 0}
+    - target: {fileID: 3819631815852312019, guid: 251244a368bc84f429905b2b05a42b73, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 251244a368bc84f429905b2b05a42b73, type: 3}
@@ -882,6 +887,10 @@ PrefabInstance:
     - target: {fileID: 4602041821070259024, guid: 510ce9f24cc257f47a56ebaeee230947, type: 3}
       propertyPath: _currentPlayerMode
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5220860318107942082, guid: 510ce9f24cc257f47a56ebaeee230947, type: 3}
+      propertyPath: m_Constraints
+      value: 112
       objectReference: {fileID: 0}
     - target: {fileID: 6856262900497516995, guid: 510ce9f24cc257f47a56ebaeee230947, type: 3}
       propertyPath: _jumpPower

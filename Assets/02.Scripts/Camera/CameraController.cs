@@ -6,6 +6,7 @@ using DG.Tweening;
 public class CameraController : MonoBehaviour
 {
     #region VALUE property
+    #region POS VALUE
     private Vector3 _posValue = Vector3.zero;
 
     private float _xPosValue = 0f;
@@ -40,8 +41,16 @@ public class CameraController : MonoBehaviour
             _posValue.z = _zPosValue;
         }
     }
-
-
+    #endregion
+    #region CHECK VALUE
+    private bool _isXPosValue = false;
+    public bool ISXPOSVALUE { get => _isXPosValue; set => _isXPosValue = value; }
+    private bool _isYPosValue = false;
+    public bool ISYPOSVALUE { get => _isYPosValue; set => _isYPosValue = value; }
+    private bool _isZPosValue = false;
+    public bool ISZPOSVALUE { get => _isZPosValue; set => _isZPosValue = value; }
+    #endregion
+    #region ROTATION VALUE
     private Vector3 _rotationValue = Vector3.zero;
     private float _xRotationValue = 0f;
     public float XROTATIONVALUE
@@ -74,13 +83,35 @@ public class CameraController : MonoBehaviour
         }
     }
     #endregion
+    #endregion
+
+    [SerializeField] private float _time = 0.05f;
 
     private void LateUpdate() => CameraMove();
     private void CameraMove()
     {
-        //transform.DOMove(_posValue, 0.05f); 
-        
-        transform.position = new Vector3(Mathf.Lerp(transform.position.x, _posValue.x, 0.05f), Mathf.Lerp(transform.position.y, _posValue.y, 0.05f), _posValue.z);
+        transform.position = GetLerpValue();
         transform.DORotate(_rotationValue, 0.1f);
+    }
+
+    Vector3 GetLerpValue()
+    {
+        return new Vector3(GetLerpValueX(), GetLerpValueY(), GetLerpValueZ());
+    }
+
+    float GetLerpValueX()
+    {
+        if (_isXPosValue) return _posValue.x;
+        return Mathf.Lerp(transform.position.x, _posValue.x, _time);
+    }
+    float GetLerpValueY()
+    {
+        if (_isYPosValue) return _posValue.y;
+        return Mathf.Lerp(transform.position.y, _posValue.y, _time);
+    }
+    float GetLerpValueZ()
+    {
+        if (_isZPosValue) return _posValue.z;
+        return Mathf.Lerp(transform.position.z, _posValue.z, _time);
     }
 }

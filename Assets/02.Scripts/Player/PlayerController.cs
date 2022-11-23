@@ -7,6 +7,9 @@ public enum PlayerMode
     NONE,
     PLAYERMODE_CUBE,
     PLAYERMODE_AIRPLANE,
+    PLAYERMODE_SPIDER,
+    PLAYERMODE_HUMAN,
+    END
 }
 
 [RequireComponent(typeof(CustomGravity))]
