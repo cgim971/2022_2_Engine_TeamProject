@@ -29,8 +29,7 @@ public class PlayerController : MonoBehaviour
     public Dictionary<PlayerMode, PlayerMovement_Base> PLAYERMOVEMENTTYPEDICTIONARY => _playerMovementTypeDictionary;
     [SerializeField] private PlayerMode _currentPlayerMode = PlayerMode.NONE;
 
-
-    private  void Awake() => Init();
+    private void Awake() => Init();
     public void Init()
     {
         _rigidbody = GetComponent<Rigidbody>();

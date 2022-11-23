@@ -18,5 +18,4 @@ public class GameManager : MonoSingleton<GameManager>
             PlayerPrefs.DeleteAll();
         }
     }
-
 }

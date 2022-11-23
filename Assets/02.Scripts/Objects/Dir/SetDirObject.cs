@@ -12,5 +12,4 @@ public class SetDirObject : Object_Base
         obj.GetComponentInParent<PlayerMovement_Base>().SetDir(_dir, _gravity);
     }
     public override void EffectEnd(GameObject obj) { }
-
 }
