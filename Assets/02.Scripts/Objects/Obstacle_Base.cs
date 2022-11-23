@@ -6,16 +6,36 @@ public abstract class Obstacle_Base : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Obstacle");
+        if(other.CompareTag("Player"))
+        {
+            Debug.Log("Obstacle");
+
+            if (IsUp()) return;
 
 #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
+            UnityEditor.EditorApplication.isPlaying = false;
 #else
         Application.Quit();
 #endif
+        }
+
+
+
     }
 
+    private bool IsUp()
+    {
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position, transform.up, out hit))
+        {
+            if(hit.collider.CompareTag("Player"))
+            {
+                return true;
+            }
+        }
 
 
 
+        return false;
+    }
 }
