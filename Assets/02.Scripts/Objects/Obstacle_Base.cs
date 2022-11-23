@@ -10,7 +10,7 @@ public abstract class Obstacle_Base : MonoBehaviour
         {
             Debug.Log("Obstacle");
 
-            if (IsUp()) return;
+            //if (IsUp()) return;
 
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
@@ -33,9 +33,6 @@ public abstract class Obstacle_Base : MonoBehaviour
                 return true;
             }
         }
-
-
-
         return false;
     }
 }
