@@ -8,5 +8,6 @@ public class TurnObject : Object_Base
     {
         obj.GetComponentInParent<PlayerMovement_Base>().TurnObject();
     }
+
     public override void EffectEnd(GameObject obj) { }
 }

@@ -6,7 +6,11 @@ public enum PlayerMode
 {
     NONE,
     PLAYERMODE_CUBE,
+    PLAYERMODE_UFO,
     PLAYERMODE_AIRPLANE,
+    PLAYERMODE_SPIDER,
+    PLAYERMODE_HUMAN,
+    END
 }
 
 [RequireComponent(typeof(CustomGravity))]
@@ -43,7 +47,7 @@ public class PlayerController : MonoBehaviour
         _playerMovementTypeDictionary.Clear();
 
         _playerMovementTypeDictionary.Add(PlayerMode.PLAYERMODE_CUBE, transform.Find("Player_Cube").GetComponent<PlayerMovement_Cube>());
-        _playerMovementTypeDictionary.Add(PlayerMode.PLAYERMODE_AIRPLANE, transform.Find("Player_Airplane").GetComponent<PlayerMovement_Airplane>());
+        _playerMovementTypeDictionary.Add(PlayerMode.PLAYERMODE_UFO, transform.Find("Player_UFO").GetComponent<PlayerMovement_UFO>());
 
         foreach (PlayerMode playerMode in _playerMovementTypeDictionary.Keys)
         {

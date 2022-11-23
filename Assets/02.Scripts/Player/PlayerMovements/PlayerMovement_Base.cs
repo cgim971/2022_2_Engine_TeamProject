@@ -38,9 +38,8 @@ public abstract class PlayerMovement_Base : MonoBehaviour
     }
 
     public abstract void UseInit();
-    
 
-    private void FixedUpdate()
+    public virtual void FixedUpdate()
     {
         Move();
         CameraMove();
@@ -51,5 +50,36 @@ public abstract class PlayerMovement_Base : MonoBehaviour
     public abstract void Move();
     public abstract void Jumping();
     public abstract bool CheckGround();
-    public void CameraMove() => _cameraController.ZPOSVALUE = transform.position.z;
+    public void CameraMove()
+    {
+        if (_dir.x != 0)
+        {
+            _cameraController.ISXPOSVALUE = true;
+            _cameraController.XPOSVALUE = transform.position.x;
+        }
+        else
+        {
+            _cameraController.ISXPOSVALUE = false;
+        }
+
+        if (_dir.y != 0)
+        {
+            _cameraController.ISYPOSVALUE = true;
+            _cameraController.YPOSVALUE = transform.position.y;
+        }
+        else
+        {
+            _cameraController.ISYPOSVALUE = false;
+        }
+
+        if (_dir.z != 0)
+        {
+            _cameraController.ISZPOSVALUE = true;
+            _cameraController.ZPOSVALUE = transform.position.z;
+        }
+        else
+        {
+            _cameraController.ISZPOSVALUE = false;
+        }
+    }
 }

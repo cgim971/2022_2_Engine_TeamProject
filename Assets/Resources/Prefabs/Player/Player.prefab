@@ -156,11 +156,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8772137792023694584, guid: 30c3cc8c81f51f94ba0f5c5111675b07, type: 3}
       propertyPath: m_Name
-      value: Player_Airplane
+      value: Player_UFO
       objectReference: {fileID: 0}
     - target: {fileID: 8772137792023694584, guid: 30c3cc8c81f51f94ba0f5c5111675b07, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8772137792023694588, guid: 30c3cc8c81f51f94ba0f5c5111675b07, type: 3}
       propertyPath: m_RootOrder

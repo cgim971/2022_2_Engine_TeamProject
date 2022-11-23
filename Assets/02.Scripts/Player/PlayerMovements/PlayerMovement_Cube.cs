@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class PlayerMovement_Cube : PlayerMovement_Base
 {
-
     public override void UseInit()
     {
         _customGravity.ISGRAVITY = true;
@@ -53,5 +52,4 @@ public class PlayerMovement_Cube : PlayerMovement_Base
             Jumping();
         }
     }
-
 }
