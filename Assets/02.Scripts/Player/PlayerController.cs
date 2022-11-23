@@ -37,8 +37,10 @@ public class PlayerController : MonoBehaviour
         _cameraController = Camera.main.GetComponent<CameraController>();
 
         SetPlayerMovementDictionary();
-
         TransMode();
+
+        transform.position = GameManager.Instance.CURRENTSTAGE._stageStartPosition;
+        _customGravity.SetGravity(GameManager.Instance.CURRENTSTAGE._stageGravity);
     }
 
     public void SetPlayerMovementDictionary()

@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class GameManager : MonoSingleton<GameManager>
 {
+    private StageSO _currentStage = null;
+    public StageSO CURRENTSTAGE
+    {
+        get => _currentStage;
+        set => _currentStage = value;
+    }
+
+
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);

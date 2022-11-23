@@ -11,7 +11,7 @@ public class Obstacle_Base : MonoBehaviour
             Debug.Log("Obstacle");
 
             // 변경 필요 고쳐라 김찬희
-            SceneManager.LoadScene("STAGE_1");
+            SceneManager.LoadScene($"STAGE_{GameManager.Instance.CURRENTSTAGE._stageIndex}");
             SceneManager.LoadScene("GameUI", UnityEngine.SceneManagement.LoadSceneMode.Additive);
 
             //if (IsUp()) return;

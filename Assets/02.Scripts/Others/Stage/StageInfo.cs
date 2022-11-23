@@ -48,6 +48,8 @@ public class StageInfo : MonoBehaviour, IPoolable
 
     public void SelectStage()
     {
+        GameManager.Instance.CURRENTSTAGE = _stageSO;
+
         SceneManager.LoadScene($"STAGE_{_stageSO._stageIndex}");
         SceneManager.LoadScene("GameUI", UnityEngine.SceneManagement.LoadSceneMode.Additive);
     }

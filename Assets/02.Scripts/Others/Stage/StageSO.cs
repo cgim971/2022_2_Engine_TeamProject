@@ -7,4 +7,7 @@ public class StageSO : ScriptableObject
 {
     public string _stageTitle;
     public int _stageIndex;
+
+    public Vector3 _stageStartPosition;
+    public Vector3 _stageGravity;
 }
