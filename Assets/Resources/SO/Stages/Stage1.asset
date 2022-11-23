@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stageTitle: happy
   _stageIndex: 1
+  _startPos: {x: 0, y: 1, z: -12}
+  _gravity: {x: 0, y: -1, z: 0}

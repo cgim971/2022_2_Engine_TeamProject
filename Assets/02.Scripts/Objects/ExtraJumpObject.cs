@@ -8,5 +8,8 @@ public class ExtraJumpObject : Object_Base
     {
         obj.GetComponentInParent<PlayerMovement_Base>().JUMPEXTRACOUNT += 1;
     }
-    public override void EffectEnd(GameObject obj) { }
+    public override void EffectEnd(GameObject obj)
+    {
+        obj.GetComponentInParent<PlayerMovement_Base>().JUMPEXTRACOUNT = 0;
+    }
 }
