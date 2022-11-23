@@ -15,6 +15,8 @@ public class CameraController : MonoBehaviour
         get => _xPosValue;
         set
         {
+            _isXPosValue = true;
+
             _xPosValue = value;
             _posValue.x = _xPosValue;
         }
@@ -26,6 +28,8 @@ public class CameraController : MonoBehaviour
         get => _yPosValue;
         set
         {
+            _isYPosValue = true;
+
             _yPosValue = value;
             _posValue.y = _yPosValue;
         }
@@ -37,16 +41,34 @@ public class CameraController : MonoBehaviour
         get => _zPosValue;
         set
         {
+            _isZPosValue = true;
+
             _zPosValue = value;
             _posValue.z = _zPosValue;
+        }
+    }
+    #endregion
+    #region DETAIL POS VALUE
+    private bool _isDetailPosValue = false;
+    public bool ISDETAILPOSVALUE { get => _isDetailPosValue; set => _isDetailPosValue = value; }
+
+    private Vector3 _detailPosValue = Vector3.zero;
+    public Vector3 DETAILPOSVALUE
+    {
+        get => _detailPosValue; set
+        {
+            _isDetailPosValue = true;
+            _detailPosValue = value;
         }
     }
     #endregion
     #region CHECK VALUE
     private bool _isXPosValue = false;
     public bool ISXPOSVALUE { get => _isXPosValue; set => _isXPosValue = value; }
+
     private bool _isYPosValue = false;
     public bool ISYPOSVALUE { get => _isYPosValue; set => _isYPosValue = value; }
+
     private bool _isZPosValue = false;
     public bool ISZPOSVALUE { get => _isZPosValue; set => _isZPosValue = value; }
     #endregion
@@ -101,17 +123,44 @@ public class CameraController : MonoBehaviour
 
     float GetLerpValueX()
     {
-        if (_isXPosValue) return _posValue.x;
-        return Mathf.Lerp(transform.position.x, _posValue.x, _time);
+        float transformPositionX = transform.position.x;
+        float posValueX = _posValue.x;
+
+        if (_isDetailPosValue)
+        {
+            transformPositionX += _detailPosValue.x;
+            posValueX += _detailPosValue.x;
+        }
+        if (_isXPosValue) return posValueX;
+
+        return Mathf.Lerp(transformPositionX, posValueX, _time);
     }
     float GetLerpValueY()
     {
-        if (_isYPosValue) return _posValue.y;
-        return Mathf.Lerp(transform.position.y, _posValue.y, _time);
+        float transformPositionY = transform.position.y;
+        float posValueY = _posValue.y;
+
+        if (_isDetailPosValue)
+        {
+            transformPositionY += _detailPosValue.y;
+            posValueY += _detailPosValue.y;
+        }
+        if (_isYPosValue) return posValueY;
+
+        return Mathf.Lerp(transformPositionY, posValueY, _time);
     }
     float GetLerpValueZ()
     {
-        if (_isZPosValue) return _posValue.z;
-        return Mathf.Lerp(transform.position.z, _posValue.z, _time);
+        float transformPositionZ = transform.position.z;
+        float posValueZ = _posValue.z;
+
+        if (_isDetailPosValue)
+        {
+            transformPositionZ += _detailPosValue.z;
+            posValueZ += _detailPosValue.z;
+        }
+        if (_isZPosValue) return posValueZ;
+
+        return Mathf.Lerp(transformPositionZ, posValueZ, _time);
     }
 }

@@ -44,9 +44,12 @@ public abstract class PlayerMovement_Base : MonoBehaviour
         Move();
         CameraMove();
     }
-    public void TurnObject() => _dir *= -1;
-    public void TurnObject(Vector3 dir) => _dir = dir;
-
+    public void ReverseDir() => _dir *= -1;
+    public void SetDir(Vector3 dir, Vector3 gravity)
+    {
+        _dir = dir;
+        _customGravity.SetGravity(gravity);
+    }
     public abstract void Move();
     public abstract void Jumping();
     public abstract bool CheckGround();
@@ -54,7 +57,6 @@ public abstract class PlayerMovement_Base : MonoBehaviour
     {
         if (_dir.x != 0)
         {
-            _cameraController.ISXPOSVALUE = true;
             _cameraController.XPOSVALUE = transform.position.x;
         }
         else
@@ -64,7 +66,6 @@ public abstract class PlayerMovement_Base : MonoBehaviour
 
         if (_dir.y != 0)
         {
-            _cameraController.ISYPOSVALUE = true;
             _cameraController.YPOSVALUE = transform.position.y;
         }
         else
@@ -74,7 +75,6 @@ public abstract class PlayerMovement_Base : MonoBehaviour
 
         if (_dir.z != 0)
         {
-            _cameraController.ISZPOSVALUE = true;
             _cameraController.ZPOSVALUE = transform.position.z;
         }
         else
