@@ -40,7 +40,7 @@ public abstract class PlayerMovement_Base : MonoBehaviour
     public abstract void UseInit();
     
 
-    private void FixedUpdate()
+    public virtual void FixedUpdate()
     {
         Move();
         CameraMove();
