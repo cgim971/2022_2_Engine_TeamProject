@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d016817cb182ac945b51d0760ea5b8fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentPlayerMode: 2
+  _currentPlayerMode: 1
 --- !u!54 &5220860318107942082
 Rigidbody:
   m_ObjectHideFlags: 0
