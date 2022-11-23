@@ -14,15 +14,16 @@ public abstract class Object_Base : MonoBehaviour
             _useFlag = true;
             EffectStart(other.gameObject);
         }
-        }
+    }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player") && _useFlag && _moreUse)
+        if (other.CompareTag("Player") && _useFlag)
         {
-            _useFlag = false;
             EffectEnd(other.gameObject);
         }
+        if (_moreUse)
+            _useFlag = false;
     }
 
     public abstract void EffectStart(GameObject obj);
