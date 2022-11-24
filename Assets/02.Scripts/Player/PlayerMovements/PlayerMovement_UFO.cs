@@ -25,8 +25,6 @@ public class PlayerMovement_UFO : PlayerMovement_Base
 
     public override void Jumping()
     {
-        if (_isJumpable == false) return;
-
         _rigidbody.velocity = Vector3.zero;
 
         Vector3 jumpPower = _customGravity.GRAVITY * -1 * _jumpPower;

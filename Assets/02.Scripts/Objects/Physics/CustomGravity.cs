@@ -40,6 +40,9 @@ public class CustomGravity : MonoBehaviour
     public void SetGravity(Vector3 gravity)
     {
         _gravity = gravity;
+        _rigidbody.velocity = Vector3.zero;
+
+
         //GetComponent<ParticleSystem>().Play();
     }
 }

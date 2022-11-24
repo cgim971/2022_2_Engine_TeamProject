@@ -8,6 +8,7 @@ public class GravitySetObject : Object_Base
     public override void EffectStart(GameObject obj)
     {
         obj.GetComponentInParent<CustomGravity>().SetGravity(_gravity);
+        obj.GetComponentInParent<PlayerController>().transform.position = transform.position;
         obj.GetComponentInParent<PlayerMovement_Base>().JUMPEXTRACOUNT = 0;
     }
     public override void EffectEnd(GameObject obj) { }

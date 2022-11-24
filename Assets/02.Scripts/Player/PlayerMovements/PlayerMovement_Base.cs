@@ -21,14 +21,6 @@ public abstract class PlayerMovement_Base : MonoBehaviour
         get => _jumpExtraCount;
         set => _jumpExtraCount = value;
     }
-
-    protected bool _isJumpable = true;
-    public bool ISJUMPABLE
-    {
-        get => _isJumpable;
-        set => _isJumpable = value;
-    }
-
     protected LayerMask _groundLayer;
     #endregion
 

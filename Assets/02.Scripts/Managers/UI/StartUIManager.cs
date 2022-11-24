@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 
 public class StartUIManager : MonoBehaviour
 {
     private Button _startBtn;
-    private TextMeshProUGUI _startBtnText;
 
+    #region INVENTORY
     private Button _inventoryBtn;
-    private TextMeshProUGUI _inventoryBtnText;
+    private bool _isInventory = false;
+    [SerializeField] private CanvasGroup _inventoryPanel;
+    #endregion
+
 
     private Button _settingBtn;
-    private TextMeshProUGUI _settingBtnText;
 
     private void Awake()
     {
@@ -29,28 +32,39 @@ public class StartUIManager : MonoBehaviour
         _settingBtn = transform.Find("SettingBtn").GetComponent<Button>();
         _settingBtn.onClick.AddListener(() => OnClickSettingBtn());
 
-        _startBtnText = _startBtn.transform.Find("StartBtnText").GetComponent<TextMeshProUGUI>();
-        _startBtnText.text = "Start";
-        _inventoryBtnText = _inventoryBtn.transform.Find("InventoryBtnText").GetComponent<TextMeshProUGUI>();
-        _inventoryBtnText.text = "Inventory";
-        _settingBtnText = _settingBtn.transform.Find("SettingBtnText").GetComponent<TextMeshProUGUI>();
-        _settingBtnText.text = "Setting";
+        _startBtn.transform.Find("StartBtnText").GetComponent<TextMeshProUGUI>().text = "Start";
+        _inventoryBtn.transform.Find("InventoryBtnText").GetComponent<TextMeshProUGUI>().text = "Inventory";
+        _settingBtn.transform.Find("SettingBtnText").GetComponent<TextMeshProUGUI>().text = "Setting";
+
     }
+
+
 
     public void OnClickStartBtn()
     {
         SceneManager.LoadScene("02.StageSelectScene");
     }
 
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            OnClickInventoryBtn();
+        }
+    }
 
     public void OnClickInventoryBtn()
     {
-        Debug.Log("인벤토리 창 올라옴");
+        _isInventory = !_isInventory;
+
+
     }
+
 
     public void OnClickSettingBtn()
     {
         Debug.Log("셋팅 창 올라옴");
+
     }
 
 }
