@@ -25,9 +25,12 @@ public class PlayerController : MonoBehaviour
     public CameraController CAMERACONTROLLER { get => _cameraController; set => _cameraController = value; }
 
     #endregion
-    private Dictionary<PlayerMode, PlayerMovement_Base> _playerMovementTypeDictionary = new Dictionary<PlayerMode, PlayerMovement_Base>();
-    public Dictionary<PlayerMode, PlayerMovement_Base> PLAYERMOVEMENTTYPEDICTIONARY => _playerMovementTypeDictionary;
     [SerializeField] private PlayerMode _currentPlayerMode = PlayerMode.NONE;
+
+    private Dictionary<PlayerMode, PlayerMovement_Base> _playerMovementTypeDictionary = new Dictionary<PlayerMode, PlayerMovement_Base>();
+
+
+    public StageSO stage;
 
     private void Awake() => Init();
     public void Init()
@@ -39,6 +42,7 @@ public class PlayerController : MonoBehaviour
         SetPlayerMovementDictionary();
         TransMode();
 
+        GameManager.Instance.CURRENTSTAGE = stage;
         transform.position = GameManager.Instance.CURRENTSTAGE._stageStartPosition;
         _customGravity.SetGravity(GameManager.Instance.CURRENTSTAGE._stageGravity);
     }
@@ -49,6 +53,7 @@ public class PlayerController : MonoBehaviour
 
         _playerMovementTypeDictionary.Add(PlayerMode.PLAYERMODE_CUBE, transform.Find("Player_Cube").GetComponent<PlayerMovement_Cube>());
         _playerMovementTypeDictionary.Add(PlayerMode.PLAYERMODE_UFO, transform.Find("Player_UFO").GetComponent<PlayerMovement_UFO>());
+        _playerMovementTypeDictionary.Add(PlayerMode.PLAYERMODE_AIRPLANE, transform.Find("Player_Airplane").GetComponent<PlayerMovement_Airplane>());
 
         foreach (PlayerMode playerMode in _playerMovementTypeDictionary.Keys)
         {

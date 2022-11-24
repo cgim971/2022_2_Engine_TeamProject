@@ -22,11 +22,17 @@ public abstract class PlayerMovement_Base : MonoBehaviour
         set => _jumpExtraCount = value;
     }
 
+    protected bool _isJumpable = true;
+    public bool ISJUMPABLE
+    {
+        get => _isJumpable;
+        set => _isJumpable = value;
+    }
+
     protected LayerMask _groundLayer;
     #endregion
 
     private void Awake() => Init();
-
     void Init()
     {
         _playerController = GetComponentInParent<PlayerController>();
@@ -45,7 +51,7 @@ public abstract class PlayerMovement_Base : MonoBehaviour
         CameraMove();
     }
     public void ReverseDir() => _dir *= -1;
-    public void SetDir(Vector3 dir, Vector3 gravity)
+    public virtual void SetDir(Vector3 dir, Vector3 gravity)
     {
         _dir = dir;
         _customGravity.SetGravity(gravity);

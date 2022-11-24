@@ -9,7 +9,12 @@ public class SetDirObject : Object_Base
 
     public override void EffectStart(GameObject obj)
     {
+
+        obj.GetComponentInParent<PlayerMovement_Base>().ISJUMPABLE = false;
         obj.GetComponentInParent<PlayerMovement_Base>().SetDir(_dir, _gravity);
     }
-    public override void EffectEnd(GameObject obj) { }
+    public override void EffectEnd(GameObject obj)
+    {
+        obj.GetComponentInParent<PlayerMovement_Base>().ISJUMPABLE = true;
+    }
 }

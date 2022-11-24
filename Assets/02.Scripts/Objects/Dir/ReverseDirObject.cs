@@ -6,7 +6,11 @@ public class ReverseDirObject : Object_Base
 {
     public override void EffectStart(GameObject obj)
     {
+        obj.GetComponentInParent<PlayerMovement_Base>().ISJUMPABLE = false;
         obj.GetComponentInParent<PlayerMovement_Base>().ReverseDir();
     }
-    public override void EffectEnd(GameObject obj) { }
+    public override void EffectEnd(GameObject obj)
+    {
+        obj.GetComponentInParent<PlayerMovement_Base>().ISJUMPABLE = true;
+    }
 }
