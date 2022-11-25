@@ -10,20 +10,26 @@ public class StartUIManager : MonoBehaviour
     private Button _startBtn;
     [SerializeField] private float _delay = 0.5f;
 
-    [SerializeField] private Image _fadePanel;
+    [SerializeField] private CanvasGroup _fadePanel;
 
     #region INVENTORY
     private Button _inventoryBtn;
     private bool _isInventory = false;
-    [SerializeField] private GameObject _inventoryPanel;
+    private CanvasGroup _inventoryPanelCanvasGroup;
 
     static Sequence _openInventorySequence;
     static Sequence _closeInventorySequence;
 
     #endregion
 
-
+    #region SETTING
     private Button _settingBtn;
+    private bool _isSetting = false;
+    private CanvasGroup _settingPanelCanvasGroup;
+
+    static Sequence _openSettingSequence;
+    static Sequence _closeSettingSequence;
+    #endregion
 
     private void Awake()
     {
@@ -43,60 +49,108 @@ public class StartUIManager : MonoBehaviour
         _inventoryBtn.transform.Find("InventoryBtnText").GetComponent<TextMeshProUGUI>().text = "Inventory";
         _settingBtn.transform.Find("SettingBtnText").GetComponent<TextMeshProUGUI>().text = "Setting";
 
+        _fadePanel = GameObject.Find("Canvas").transform.Find("FadePanel").GetComponent<CanvasGroup>();
+        _inventoryPanelCanvasGroup = GameObject.Find("Canvas").transform.Find("InventoryPanel").GetComponent<CanvasGroup>();
+        _settingPanelCanvasGroup = GameObject.Find("Canvas").transform.Find("SettingPanel").GetComponent<CanvasGroup>();
+
         SetSequence();
+        SetPanel();
     }
 
 
     public void SetSequence()
     {
+        #region Inventory
         _openInventorySequence = DOTween.Sequence()
             .SetAutoKill(false)
             .OnRewind(() =>
             {
-                _fadePanel.gameObject.SetActive(true);
+                _fadePanel.interactable = true;
+                _fadePanel.blocksRaycasts = true;
             })
             .Append(_fadePanel.DOFade(0.9f, _delay))
-            .AppendCallback(() =>
-            {
-                _inventoryPanel.SetActive(true);
-            })
+            .Join(_inventoryPanelCanvasGroup.DOFade(1f, _delay))
             .Append(_fadePanel.DOFade(0.0f, _delay))
             .OnComplete(() =>
             {
-                _fadePanel.gameObject.SetActive(false);
+                _fadePanel.interactable = false;
+                _fadePanel.blocksRaycasts = false;
+                _inventoryPanelCanvasGroup.interactable = true;
+                _inventoryPanelCanvasGroup.blocksRaycasts = true;
             });
+
 
         _closeInventorySequence = DOTween.Sequence()
             .SetAutoKill(false)
             .OnRewind(() =>
             {
-                _fadePanel.gameObject.SetActive(true);
+                _fadePanel.interactable = true;
+                _fadePanel.blocksRaycasts = true;
             })
             .Append(_fadePanel.DOFade(0.9f, _delay))
-            .AppendCallback(() =>
-            {
-                _inventoryPanel.SetActive(false);
-            })
             .Append(_fadePanel.DOFade(0.0f, _delay))
+            .Join(_inventoryPanelCanvasGroup.DOFade(0.0f, _delay))
             .OnComplete(() =>
             {
-                _fadePanel.gameObject.SetActive(false);
+                _fadePanel.interactable = false;
+                _fadePanel.blocksRaycasts = false;
+                _inventoryPanelCanvasGroup.interactable = false;
+                _inventoryPanelCanvasGroup.blocksRaycasts = false;
             });
+        #endregion
 
+
+        #region SETTING
+        _openSettingSequence = DOTween.Sequence()
+           .SetAutoKill(false)
+           .OnRewind(() =>
+           {
+               _fadePanel.interactable = true;
+               _fadePanel.blocksRaycasts = true;
+           })
+           .Append(_fadePanel.DOFade(0.9f, _delay))
+           .Join(_settingPanelCanvasGroup.DOFade(1f, _delay))
+           .Append(_fadePanel.DOFade(0.0f, _delay))
+           .OnComplete(() =>
+           {
+               _fadePanel.interactable = false;
+               _fadePanel.blocksRaycasts = false;
+               _settingPanelCanvasGroup.interactable = true;
+               _settingPanelCanvasGroup.blocksRaycasts = true;
+           });
+
+
+        _closeSettingSequence = DOTween.Sequence()
+            .SetAutoKill(false)
+            .OnRewind(() =>
+            {
+                _fadePanel.interactable = true;
+                _fadePanel.blocksRaycasts = true;
+            })
+            .Append(_fadePanel.DOFade(0.9f, _delay))
+            .Append(_fadePanel.DOFade(0.0f, _delay))
+            .Join(_settingPanelCanvasGroup.DOFade(0.0f, _delay))
+            .OnComplete(() =>
+            {
+                _fadePanel.interactable = false;
+                _fadePanel.blocksRaycasts = false;
+                _settingPanelCanvasGroup.interactable = false;
+                _settingPanelCanvasGroup.blocksRaycasts = false;
+            });
+        #endregion
     }
 
+    public void SetPanel()
+    {
+        _fadePanel.interactable = false;
+        _fadePanel.blocksRaycasts = false;
+        _inventoryPanelCanvasGroup.interactable = false;
+        _inventoryPanelCanvasGroup.blocksRaycasts = false;
+    }
 
     public void OnClickStartBtn()
     {
         SceneManager.LoadScene("02.StageSelectScene");
-    }
-
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(1))
-        {
-            OnClickInventoryBtn();
-        }
     }
 
     public void OnClickInventoryBtn()
@@ -117,7 +171,6 @@ public class StartUIManager : MonoBehaviour
     public void OnClickSettingBtn()
     {
         Debug.Log("셋팅 창 올라옴");
-
     }
 
 }
