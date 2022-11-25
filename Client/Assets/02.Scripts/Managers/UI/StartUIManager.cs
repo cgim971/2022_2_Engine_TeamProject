@@ -9,7 +9,7 @@ public class StartUIManager : MonoBehaviour
 {
     [SerializeField] private float _delay = 0.5f;
 
-    [SerializeField] private CanvasGroup _fadePanel;
+    private CanvasGroup _fadePanel;
 
     #region START
     private Button _startBtn;
@@ -54,7 +54,7 @@ public class StartUIManager : MonoBehaviour
         _settingBtn.onClick.AddListener(() => OnClickSettingBtn());
         _settingBtn.transform.Find("SettingBtnText").GetComponent<TextMeshProUGUI>().text = "Setting";
 
-        _fadePanel = GameObject.Find("Canvas").transform.Find("FadePanel").GetComponent<CanvasGroup>();
+        _fadePanel = GameManager.Instance.UIMANAGER.PADEPANEL;
         _inventoryPanelCanvasGroup = GameObject.Find("Canvas").transform.Find("InventoryPanel").GetComponent<CanvasGroup>();
         _inventoryPanelCanvasGroup.transform.Find("ExitBtn").GetComponent<Button>().onClick.AddListener(() => OnClickInventoryBtn());
         _settingPanelCanvasGroup = GameObject.Find("Canvas").transform.Find("SettingPanel").GetComponent<CanvasGroup>();
@@ -78,15 +78,14 @@ public class StartUIManager : MonoBehaviour
                 _fadePanel.blocksRaycasts = true;
             })
             .Append(_fadePanel.DOFade(0.9f, _delay))
-            .Append(_fadePanel.DOFade(0.0f, _delay))
+            .AppendCallback(() => SceneManager.LoadScene("02.StageSelectScene"))
+            .Join(_fadePanel.DOFade(0.0f, _delay))
             .OnComplete(() =>
             {
                 _fadePanel.interactable = false;
                 _fadePanel.blocksRaycasts = false;
                 _inventoryPanelCanvasGroup.interactable = true;
                 _inventoryPanelCanvasGroup.blocksRaycasts = true;
-
-                SceneManager.LoadScene("02.StageSelectScene");
             });
         _selectStartBtnSequence.Pause();
         #endregion
