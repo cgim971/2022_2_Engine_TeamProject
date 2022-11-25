@@ -64,7 +64,6 @@ public class StartUIManager : MonoBehaviour
         SetPanel();
     }
 
-
     public void SetSequence()
     {
         #region START

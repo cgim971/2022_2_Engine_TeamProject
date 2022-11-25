@@ -50,8 +50,7 @@ public class StageInfo : MonoBehaviour, IPoolable
     {
         GameManager.Instance.CURRENTSTAGE = _stageSO;
 
-        SceneManager.LoadScene($"STAGE_{_stageSO._stageIndex}");
-        SceneManager.LoadScene("GameUI", UnityEngine.SceneManagement.LoadSceneMode.Additive);
+        SceneManager.LoadStageScene($"STAGE_{_stageSO._stageIndex}");
     }
 
     public void OnPool() { }

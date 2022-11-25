@@ -20,4 +20,10 @@ public class SceneManager
         UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName, mode);
     }
 
+    public static void LoadStageScene(string sceneName)
+    {
+        LoadScene(sceneName);
+        LoadScene("GameUI", UnityEngine.SceneManagement.LoadSceneMode.Additive);
+    }
+
 }
