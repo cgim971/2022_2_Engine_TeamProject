@@ -7,10 +7,15 @@ using DG.Tweening;
 
 public class StartUIManager : MonoBehaviour
 {
-    private Button _startBtn;
     [SerializeField] private float _delay = 0.5f;
 
     [SerializeField] private CanvasGroup _fadePanel;
+
+    #region START
+    private Button _startBtn;
+
+    static Sequence _selectStartBtnSequence;
+    #endregion
 
     #region INVENTORY
     private Button _inventoryBtn;
@@ -19,7 +24,6 @@ public class StartUIManager : MonoBehaviour
 
     static Sequence _openInventorySequence;
     static Sequence _closeInventorySequence;
-
     #endregion
 
     #region SETTING
@@ -40,18 +44,21 @@ public class StartUIManager : MonoBehaviour
     {
         _startBtn = transform.Find("StartBtn").GetComponent<Button>();
         _startBtn.onClick.AddListener(() => OnClickStartBtn());
+        _startBtn.transform.Find("StartBtnText").GetComponent<TextMeshProUGUI>().text = "Start";
+
         _inventoryBtn = transform.Find("InventoryBtn").GetComponent<Button>();
         _inventoryBtn.onClick.AddListener(() => OnClickInventoryBtn());
+        _inventoryBtn.transform.Find("InventoryBtnText").GetComponent<TextMeshProUGUI>().text = "Inventory";
+
         _settingBtn = transform.Find("SettingBtn").GetComponent<Button>();
         _settingBtn.onClick.AddListener(() => OnClickSettingBtn());
-
-        _startBtn.transform.Find("StartBtnText").GetComponent<TextMeshProUGUI>().text = "Start";
-        _inventoryBtn.transform.Find("InventoryBtnText").GetComponent<TextMeshProUGUI>().text = "Inventory";
         _settingBtn.transform.Find("SettingBtnText").GetComponent<TextMeshProUGUI>().text = "Setting";
 
         _fadePanel = GameObject.Find("Canvas").transform.Find("FadePanel").GetComponent<CanvasGroup>();
         _inventoryPanelCanvasGroup = GameObject.Find("Canvas").transform.Find("InventoryPanel").GetComponent<CanvasGroup>();
+        _inventoryPanelCanvasGroup.transform.Find("ExitBtn").GetComponent<Button>().onClick.AddListener(() => OnClickInventoryBtn());
         _settingPanelCanvasGroup = GameObject.Find("Canvas").transform.Find("SettingPanel").GetComponent<CanvasGroup>();
+        _settingPanelCanvasGroup.transform.Find("ExitBtn").GetComponent<Button>().onClick.AddListener(() => OnClickSettingBtn());
 
         SetSequence();
         SetPanel();
@@ -60,6 +67,31 @@ public class StartUIManager : MonoBehaviour
 
     public void SetSequence()
     {
+        #region START
+        _selectStartBtnSequence = DOTween.Sequence()
+            .SetAutoKill(false)
+            .OnRewind(() =>
+            {
+                Debug.Log("b");
+
+                _fadePanel.interactable = true;
+                _fadePanel.blocksRaycasts = true;
+            })
+            .Append(_fadePanel.DOFade(0.9f, _delay))
+            .Append(_fadePanel.DOFade(0.0f, _delay))
+            .OnComplete(() =>
+            {
+                _fadePanel.interactable = false;
+                _fadePanel.blocksRaycasts = false;
+                _inventoryPanelCanvasGroup.interactable = true;
+                _inventoryPanelCanvasGroup.blocksRaycasts = true;
+
+                SceneManager.LoadScene("02.StageSelectScene");
+            });
+        _selectStartBtnSequence.Pause();
+        #endregion
+
+
         #region Inventory
         _openInventorySequence = DOTween.Sequence()
             .SetAutoKill(false)
@@ -78,6 +110,7 @@ public class StartUIManager : MonoBehaviour
                 _inventoryPanelCanvasGroup.interactable = true;
                 _inventoryPanelCanvasGroup.blocksRaycasts = true;
             });
+        _openInventorySequence.Pause();
 
 
         _closeInventorySequence = DOTween.Sequence()
@@ -97,6 +130,7 @@ public class StartUIManager : MonoBehaviour
                 _inventoryPanelCanvasGroup.interactable = false;
                 _inventoryPanelCanvasGroup.blocksRaycasts = false;
             });
+        _closeInventorySequence.Pause();
         #endregion
 
 
@@ -118,6 +152,7 @@ public class StartUIManager : MonoBehaviour
                _settingPanelCanvasGroup.interactable = true;
                _settingPanelCanvasGroup.blocksRaycasts = true;
            });
+        _openSettingSequence.Pause();
 
 
         _closeSettingSequence = DOTween.Sequence()
@@ -137,6 +172,7 @@ public class StartUIManager : MonoBehaviour
                 _settingPanelCanvasGroup.interactable = false;
                 _settingPanelCanvasGroup.blocksRaycasts = false;
             });
+        _closeSettingSequence.Pause();
         #endregion
     }
 
@@ -150,7 +186,8 @@ public class StartUIManager : MonoBehaviour
 
     public void OnClickStartBtn()
     {
-        SceneManager.LoadScene("02.StageSelectScene");
+        Debug.Log("A");
+        _selectStartBtnSequence.Restart();
     }
 
     public void OnClickInventoryBtn()
@@ -170,7 +207,16 @@ public class StartUIManager : MonoBehaviour
 
     public void OnClickSettingBtn()
     {
-        Debug.Log("셋팅 창 올라옴");
+        _isSetting = !_isSetting;
+
+        if (_isSetting)
+        {
+            _openSettingSequence.Restart();
+        }
+        else
+        {
+            _closeSettingSequence.Restart();
+        }
     }
 
 }
