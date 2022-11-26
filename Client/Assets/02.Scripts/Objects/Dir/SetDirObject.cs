@@ -9,6 +9,8 @@ public class SetDirObject : Object_Base
 
     public override void EffectStart(GameObject obj)
     {
+        obj.GetComponentInParent<PlayerController>().transform.position = transform.position;
+
         obj.GetComponentInParent<PlayerMovement_Base>().SetDir(_dir, _gravity);
     }
     public override void EffectEnd(GameObject obj) { }

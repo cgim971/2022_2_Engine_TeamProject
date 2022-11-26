@@ -2678,7 +2678,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d016817cb182ac945b51d0760ea5b8fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentPlayerMode: 1
+  _currentPlayerMode: 3
   stage: {fileID: 11400000, guid: 8619e8a7317b7794dbdfb61b9541301b, type: 2}
 --- !u!33 &4605899741103406616
 MeshFilter:

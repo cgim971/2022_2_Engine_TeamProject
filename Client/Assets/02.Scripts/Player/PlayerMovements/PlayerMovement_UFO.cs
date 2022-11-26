@@ -17,7 +17,7 @@ public class PlayerMovement_UFO : PlayerMovement_Base
             yield return new WaitUntil(() => Input.GetMouseButton(0));
 
             Jumping();
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.1f);
         }
     }
 

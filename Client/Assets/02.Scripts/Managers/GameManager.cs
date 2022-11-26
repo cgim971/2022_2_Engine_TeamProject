@@ -11,25 +11,9 @@ public class GameManager : MonoSingleton<GameManager>
         set => _currentStage = value;
     }
 
-    private UIManager _uiManager;
-    public UIManager UIMANAGER
-    {
-        get
-        {
-            if (_uiManager == null)
-            {
-                _uiManager = gameObject.GetComponent<UIManager>();
-            }
-            return _uiManager;
-        }
-    }
-
-
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
-
-        SoundManager.Init();
     }
 
     public void Update()

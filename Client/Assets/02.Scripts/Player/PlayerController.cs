@@ -23,8 +23,8 @@ public class PlayerController : MonoBehaviour
     public CustomGravity CUSTOMGRAVITY { get => _customGravity; set => _customGravity = value; }
     private CameraController _cameraController = null;
     public CameraController CAMERACONTROLLER { get => _cameraController; set => _cameraController = value; }
-
     #endregion
+
     [SerializeField] private PlayerMode _currentPlayerMode = PlayerMode.NONE;
 
     private Dictionary<PlayerMode, PlayerMovement_Base> _playerMovementTypeDictionary = new Dictionary<PlayerMode, PlayerMovement_Base>();
@@ -42,6 +42,11 @@ public class PlayerController : MonoBehaviour
         SetPlayerMovementDictionary();
         TransMode();
 
+        SetStage();
+    }
+
+    public void SetStage()
+    {
         GameManager.Instance.CURRENTSTAGE = stage;
         transform.position = GameManager.Instance.CURRENTSTAGE._stageStartPosition;
         _customGravity.SetGravity(GameManager.Instance.CURRENTSTAGE._stageGravity);

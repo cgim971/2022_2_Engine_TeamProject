@@ -4,27 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class StageInfo : MonoBehaviour, IPoolable
+public class StageInfo : MonoBehaviour
 {
     private Button _selectBtn;
     private TextMeshProUGUI _stageTitleTxt;
     private TextMeshProUGUI _stageLvTxt;
 
-
     public StageSO _stageSO;
-
-    public StageSO STAGESO
-    {
-        get => _stageSO;
-        set
-        {
-            _stageSO = value;
-            SetStageInfo();
-        }
-    }
-
-    private string _objName;
-    public string NAME { get => _objName; set => _objName = value; }
 
     private void Awake()
     {
@@ -38,6 +24,8 @@ public class StageInfo : MonoBehaviour, IPoolable
 
         _stageTitleTxt = _selectBtn.transform.Find("StageTitleTxt").GetComponent<TextMeshProUGUI>();
         _stageLvTxt = _selectBtn.transform.Find("StageLvTxt").GetComponent<TextMeshProUGUI>();
+
+        SetStageInfo();
     }
 
     public void SetStageInfo()
@@ -52,8 +40,4 @@ public class StageInfo : MonoBehaviour, IPoolable
 
         SceneManager.LoadStageScene($"STAGE_{_stageSO._stageIndex}");
     }
-
-    public void OnPool() { }
-
-    public void PushObj() => PoolingManager.PushObject(NAME, this.gameObject);
 }
