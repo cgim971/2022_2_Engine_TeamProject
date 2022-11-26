@@ -2413,13 +2413,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1388921357642429451}
     m_Modifications:
+    - target: {fileID: 2795117884920575191, guid: c8041697b5bf01e4f93fbbd5355129d6, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
     - target: {fileID: 2795117885940822601, guid: c8041697b5bf01e4f93fbbd5355129d6, type: 3}
       propertyPath: m_Name
       value: Player_Cube
       objectReference: {fileID: 0}
     - target: {fileID: 2795117885940822601, guid: c8041697b5bf01e4f93fbbd5355129d6, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2795117885940822605, guid: c8041697b5bf01e4f93fbbd5355129d6, type: 3}
       propertyPath: m_RootOrder
