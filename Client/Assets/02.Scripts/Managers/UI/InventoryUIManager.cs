@@ -6,11 +6,31 @@ using UnityEngine.UI;
 public class InventoryUIManager : MonoBehaviour
 {
     [SerializeField] private ScrollRect _scrollRect;
-
-    [SerializeField] private GameObject _skinContent = null;
-    [SerializeField] private GameObject _colorContent = null;
+    [SerializeField] private Transform _parent = null;
 
     Vector2 _mousePosition;
+
+    [SerializeField] private GameObject _slot;
+    [SerializeField] private SkinListSO _skinList;
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.A)) SetInventory();
+    }
+
+    private void SetInventory()
+    {
+        
+
+        foreach (SkinSO skin in _skinList._cubeSkins)
+        {
+            GameObject newSkin = Instantiate(_slot, _parent);
+            newSkin.GetComponent<SkinInfo>().SKINSO = skin;
+        }
+    }
+
+
+
 
     public void Exit_MouseDown()
     {
@@ -25,18 +45,28 @@ public class InventoryUIManager : MonoBehaviour
         }
     }
 
-    public void SkinContent()
+    public void Next_MouseDown()
     {
-        _scrollRect.content = _skinContent.GetComponent<RectTransform>();
-
-        _skinContent.SetActive(true);
-        _colorContent.SetActive(false);
+        _mousePosition = Input.mousePosition;
     }
-    public void ColorContent()
+    public void Next_MouseUp()
     {
-        _scrollRect.content = _colorContent.GetComponent<RectTransform>();
-
-        _skinContent.SetActive(false);
-        _colorContent.SetActive(true);
+        if (Mathf.Abs(Input.mousePosition.x - _mousePosition.x) > 50)
+        {
+            Debug.Log("Next");
+        }
     }
+
+    public void Before_MouseDown()
+    {
+        _mousePosition = Input.mousePosition;
+    }
+    public void Before_MouseUp()
+    {
+        if (Mathf.Abs(Input.mousePosition.x - _mousePosition.x) > 50)
+        {
+            Debug.Log("Before");
+        }
+    }
+
 }
