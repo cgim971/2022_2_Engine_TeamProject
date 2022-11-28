@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/01.Scenes/Other/01.StartUI.unity
+- path: Assets/01.Scenes/Test/BossTest.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

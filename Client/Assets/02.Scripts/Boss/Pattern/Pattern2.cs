@@ -57,7 +57,10 @@ public class Pattern2 : MonoBehaviour
         {
             if (hit.collider.CompareTag("Player"))
             {
-                Debug.Log("Hit");
+                Debug.Log("Hit");   
+
+
+
             }
         }
     }
@@ -80,8 +83,6 @@ public class Pattern2 : MonoBehaviour
 
     private void HitDmg()
     {
-
-
 
     }
 }
